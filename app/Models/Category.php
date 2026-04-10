@@ -13,6 +13,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
+        'type',
         'description',
         'is_active',
     ];
@@ -20,6 +21,9 @@ class Category extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public const TYPE_BOOK = 'book';
+    public const TYPE_FAQ = 'faq';
 
     protected static function booted()
     {
@@ -33,5 +37,20 @@ class Category extends Model
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
+
+    public function scopeBooks($query)
+    {
+        return $query->where('type', self::TYPE_BOOK);
+    }
+
+    public function scopeFaqs($query)
+    {
+        return $query->where('type', self::TYPE_FAQ);
     }
 }

@@ -47,25 +47,10 @@
 
 <!-- Stats Section -->
 <section class="bg-brand-900 py-16 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div>
-                <p class="text-4xl font-black text-brand-500 mb-2">10th</p>
-                <p class="text-xs uppercase tracking-widest font-bold text-gray-400">Dedikasi</p>
-            </div>
-            <div>
-                <p class="text-4xl font-black text-brand-500 mb-2">1.2k+</p>
-                <p class="text-xs uppercase tracking-widest font-bold text-gray-400">Buku Terbit</p>
-            </div>
-            <div>
-                <p class="text-4xl font-black text-brand-500 mb-2">50+</p>
-                <p class="text-xs uppercase tracking-widest font-bold text-gray-400">Penghargaan</p>
-            </div>
-            <div>
-                <p class="text-4xl font-black text-brand-500 mb-2">1M+</p>
-                <p class="text-xs uppercase tracking-widest font-bold text-gray-400">Pembaca Setia</p>
-            </div>
-        </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-xl lg:text-2xl font-serif italic leading-relaxed text-gray-200">
+            "Setiap buku yang kami terbitkan adalah langkah kecil menuju mimpi besar: membangun Indonesia yang lebih literat, lebih kritis, dan lebih kaya ide."
+        </p>
     </div>
 </section>
 
