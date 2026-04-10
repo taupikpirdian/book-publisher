@@ -23,10 +23,10 @@
             <div>
                 <h4 class="font-bold text-ink mb-4">Penerbitan</h4>
                 <ul class="space-y-3 text-sm text-gray-500">
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Cara Mengirim Naskah</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Layanan Editorial</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Distribusi & Pemasaran</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">FAQ Penulis</a></li>
+                    {{-- <li><a href="#" class="hover:text-brand-700 transition-colors">Cara Mengirim Naskah</a></li> --}}
+                    <li><a href="{{ route('layanan') }}" class="hover:text-brand-700 transition-colors">Layanan Penulis</a></li>
+                    {{-- <li><a href="#" class="hover:text-brand-700 transition-colors">Distribusi & Pemasaran</a></li> --}}
+                    <li><a href="{{ route('faq') }}" class="hover:text-brand-700 transition-colors">FAQ Penulis</a></li>
                 </ul>
             </div>
 
@@ -34,10 +34,10 @@
             <div>
                 <h4 class="font-bold text-ink mb-4">Jelajahi</h4>
                 <ul class="space-y-3 text-sm text-gray-500">
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Katalog Buku</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Penulis Kami</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Acara & Bedah Buku</a></li>
-                    <li><a href="#" class="hover:text-brand-700 transition-colors">Blog Literasi</a></li>
+                    <li><a href="{{ route('koleksi') }}" class="hover:text-brand-700 transition-colors">Katalog Buku</a></li>
+                    <li><a href="{{ route('tentang') }}" class="hover:text-brand-700 transition-colors">Tentang Kami</a></li>
+                    {{-- <li><a href="#" class="hover:text-brand-700 transition-colors">Acara & Bedah Buku</a></li> --}}
+                    {{-- <li><a href="#" class="hover:text-brand-700 transition-colors">Blog Literasi</a></li> --}}
                 </ul>
             </div>
 

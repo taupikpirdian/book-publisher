@@ -26,11 +26,11 @@
                     Kami adalah penerbit independen yang berdedikasi mencari, memoles, dan menerbitkan karya-karya literatur terbaik dari penulis berbakat Indonesia ke genggaman pembaca.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#koleksi" class="inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
+                    <a href="{{ route('koleksi') }}" class="inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
                         <i data-lucide="library" class="w-5 h-5"></i>
                         Jelajahi Koleksi
                     </a>
-                    <a href="#kirim-naskah" class="inline-flex justify-center items-center gap-2 bg-white hover:bg-gray-50 text-brand-500 border border-brand-500 px-8 py-3.5 rounded-full font-medium transition-all shadow-sm hover:shadow">
+                    <a href="{{ route('layanan') }}" class="inline-flex justify-center items-center gap-2 bg-white hover:bg-gray-50 text-brand-500 border border-brand-500 px-8 py-3.5 rounded-full font-medium transition-all shadow-sm hover:shadow">
                         Pelajari Penerbitan
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
@@ -242,13 +242,13 @@
             Kami selalu mencari suara-suara baru yang segar dan cerita yang memikat. Jangan biarkan naskah Anda hanya tersimpan di dalam laci.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#" class="inline-flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-xl">
+            <a href="https://wa.me/6285846132417?text=Halo%20Pustaka%20Aksara,%20saya%20ingin%20mengirimkan%20naskah%20untuk%20diterbitkan.%20Mohon%20informasi%20mengenai%20persyaratan%20dan%20prosedur%20penerbitan.%20Terima%20kasih." target="_blank" class="inline-flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-xl">
                 <i data-lucide="send" class="w-5 h-5"></i>
                 Kirim Naskah Sekarang
             </a>
-            <a href="#" class="inline-flex justify-center items-center gap-2 bg-transparent hover:bg-brand-800 text-white border border-brand-500 px-8 py-4 rounded-full font-medium transition-colors">
+            {{-- <a href="#" class="inline-flex justify-center items-center gap-2 bg-transparent hover:bg-brand-800 text-white border border-brand-500 px-8 py-4 rounded-full font-medium transition-colors">
                 Baca Syarat & Ketentuan
-            </a>
+            </a> --}}
         </div>
     </div>
 </section>
