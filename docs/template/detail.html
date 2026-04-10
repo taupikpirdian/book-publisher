@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senja di Pelabuhan Ratu - Pustaka Aksara</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            500: '#eab305',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            900: '#1c1917',
+                        },
+                        paper: '#fdfcf9',
+                        ink: '#1c1917',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .book-shadow {
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.15), 0 0 5px rgba(0,0,0,0.05);
+        }
+        .spine-effect {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(0,0,0,0.05) 100%);
+            z-index: 10;
+        }
+        .tab-active {
+            border-bottom: 3px solid #eab305;
+            color: #1c1917;
+        }
+    </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-paper/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="bg-brand-500 p-1.5 rounded-lg">
+                        <i data-lucide="book-open" class="h-6 w-6 text-white"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl text-brand-900 tracking-tight">Pustaka Aksara</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Beranda</a>
+                    <a href="#koleksi" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Koleksi Buku</a>
+                    <a href="#layanan" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Layanan Penulis</a>
+                    <a href="#tentang" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Tentang Kami</a>
+                    <a href="#kirim-naskah" class="bg-brand-500 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-md hover:shadow-lg flex items-center gap-2">
+                        <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                        Kirim Naskah
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-500 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a href="#beranda" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500 rounded-md">Beranda</a>
+                <a href="#koleksi" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500 rounded-md">Koleksi Buku</a>
+                <a href="#layanan" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500 rounded-md">Layanan Penulis</a>
+                <a href="#tentang" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500 rounded-md">Tentang Kami</a>
+                <a href="#kirim-naskah" class="block mt-4 text-center bg-brand-500 text-white px-3 py-3 rounded-md font-medium">Kirim Naskah Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+
+    <!-- Product Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-start">
+            
+            <!-- Left: Book Visuals -->
+            <div class="lg:col-span-5 mb-10 lg:mb-0">
+                <div class="sticky top-24">
+                    <div class="relative group cursor-zoom-in">
+                        <div class="aspect-[2/3] relative rounded-r-lg overflow-hidden book-shadow">
+                            <div class="spine-effect"></div>
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Senja di Pelabuhan Ratu" class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-6 grid grid-cols-4 gap-4">
+                            <button class="aspect-square border-2 border-brand-500 rounded-md overflow-hidden bg-white">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail 1" class="w-full h-full object-cover opacity-100">
+                            </button>
+                            <button class="aspect-square border border-gray-200 rounded-md overflow-hidden bg-white hover:border-brand-500 transition-colors">
+                                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail 2" class="w-full h-full object-cover opacity-60">
+                            </button>
+                            <div class="aspect-square border border-gray-200 rounded-md flex flex-col items-center justify-center text-gray-400 text-xs">
+                                <i data-lucide="image" class="w-5 h-5 mb-1"></i>
+                                Intip Isi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Book Details -->
+            <div class="lg:col-span-7">
+                <nav class="flex mb-4 text-xs font-bold uppercase tracking-widest text-brand-700 gap-2">
+                    <a href="#" class="hover:text-brand-900">Katalog</a>
+                    <span>/</span>
+                    <a href="#" class="hover:text-brand-900">Fiksi</a>
+                    <span>/</span>
+                    <span class="text-gray-400">Novel</span>
+                </nav>
+
+                <h1 class="font-serif text-3xl md:text-5xl font-bold text-brand-900 mb-2 leading-tight">Senja di Pelabuhan Ratu</h1>
+                <p class="text-lg md:text-xl text-gray-500 mb-6">Oleh <a href="#" class="text-brand-700 hover:underline font-medium">Raka P. Dewantara</a></p>
+
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="flex text-brand-500">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star-half" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="text-sm font-semibold text-gray-700">4.7 (128 Ulasan)</span>
+                    <span class="text-gray-300">|</span>
+                    <span class="text-sm text-green-600 font-bold flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i> Stok Tersedia
+                    </span>
+                </div>
+
+                <div class="bg-brand-50 rounded-2xl p-6 mb-8 border border-brand-100">
+                    <div class="flex items-baseline gap-3 mb-4">
+                        <span class="text-3xl font-black text-brand-900">Rp 85.000</span>
+                        <span class="text-lg text-gray-400 line-through">Rp 110.000</span>
+                        <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">Hemat 23%</span>
+                    </div>
+
+                    <!-- Format Selection -->
+                    <div class="space-y-3">
+                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wider">Pilih Format:</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="relative flex flex-col p-4 bg-white border-2 border-brand-500 rounded-xl cursor-pointer shadow-sm">
+                                <input type="radio" name="format" value="cetak" class="sr-only" checked>
+                                <span class="text-sm font-bold">Buku Cetak</span>
+                                <span class="text-xs text-gray-500">Soft Cover + Pembatas</span>
+                                <div class="absolute top-2 right-2 text-brand-500">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                                </div>
+                            </label>
+                            <label class="relative flex flex-col p-4 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-500 transition-colors">
+                                <input type="radio" name="format" value="ebook" class="sr-only">
+                                <span class="text-sm font-bold">E-Book (PDF/EPUB)</span>
+                                <span class="text-xs text-gray-500 text-brand-600">Rp 45.000</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                    <button class="flex-grow bg-brand-500 hover:bg-brand-600 text-brand-900 font-black py-4 rounded-xl shadow-lg transition-transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        Tambah ke Keranjang
+                    </button>
+                    <button class="bg-white border-2 border-brand-500 text-brand-900 p-4 rounded-xl hover:bg-brand-50 transition-colors">
+                        <i data-lucide="heart" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-gray-200 mb-6">
+                    <div class="flex gap-8">
+                        <button class="pb-4 text-sm font-bold uppercase tracking-wider tab-active">Sinopsis</button>
+                        <button class="pb-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-ink transition-colors">Detail Buku</button>
+                        <button class="pb-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-ink transition-colors">Penulis</button>
+                    </div>
+                </div>
+
+                <div class="prose prose-sm text-gray-600 leading-relaxed max-w-none">
+                    <p class="mb-4">
+                        Berlatar di pesisir selatan Jawa yang mistis, <strong>Senja di Pelabuhan Ratu</strong> mengisahkan tentang Arka, seorang jurnalis yang mencoba mengungkap misteri hilangnya kapal-kapal nelayan di malam purnama. Namun, pencariannya justru membawanya pada pertemuan tak terduga dengan seorang wanita misterius di tepi tebing yang tampaknya tahu lebih banyak tentang ombak daripada manusia manapun.
+                    </p>
+                    <p>
+                        Sebuah narasi tentang kehilangan, harapan, dan rahasia yang disimpan oleh samudera. Raka P. Dewantara kembali dengan gaya bahasa yang puitis namun tetap tajam, mengajak pembaca menyelami kedalaman emosi sedalam Samudera Hindia.
+                    </p>
+                </div>
+
+                <!-- Book Metadata Quick Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-gray-100">
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">ISBN</p>
+                        <p class="text-sm font-bold">978-602-123-456-7</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Halaman</p>
+                        <p class="text-sm font-bold">320 Hlm</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Terbit</p>
+                        <p class="text-sm font-bold">Maret 2026</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Bahasa</p>
+                        <p class="text-sm font-bold">Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Related Books -->
+    <section class="bg-brand-50/50 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-2xl font-bold text-brand-900 mb-10 border-l-4 border-brand-500 pl-4">Mungkin Anda Juga Suka</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Related Item 1 -->
+                <a href="#" class="group">
+                    <div class="aspect-[2/3] bg-white rounded shadow-sm overflow-hidden mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Buku Lain" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">Jejak Rempah Nusantara</h3>
+                    <p class="text-xs text-gray-500">Ahmad Luthfi</p>
+                    <p class="mt-2 font-bold text-brand-900 text-sm">Rp 140.000</p>
+                </a>
+                
+                <!-- Related Item 2 -->
+                <a href="#" class="group">
+                    <div class="aspect-[2/3] bg-white rounded shadow-sm overflow-hidden mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1525505927227-6ce1c402b123?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Buku Lain" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">Hujan di Bulan Juni</h3>
+                    <p class="text-xs text-gray-500">Maya Angelina</p>
+                    <p class="mt-2 font-bold text-brand-900 text-sm">Rp 75.000</p>
+                </a>
+
+                <!-- Related Item 3 (Mobile Hidden) -->
+                <a href="#" class="hidden md:block group">
+                    <div class="aspect-[2/3] bg-white rounded shadow-sm overflow-hidden mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1491841243116-758039f5ad59?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Buku Lain" class="w-full h-full object-cover opacity-80">
+                    </div>
+                    <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">Lembayung Tatapan</h3>
+                    <p class="text-xs text-gray-500">Siti Rahma</p>
+                    <p class="mt-2 font-bold text-brand-900 text-sm">Rp 92.000</p>
+                </a>
+                
+                <!-- Related Item 4 (Mobile Hidden) -->
+                <a href="#" class="hidden md:block group">
+                    <div class="aspect-[2/3] bg-white rounded shadow-sm overflow-hidden mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1531243269054-5ebf6f3b0b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Buku Lain" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">Filosofi Teras</h3>
+                    <p class="text-xs text-gray-500">Henry Manampiring</p>
+                    <p class="mt-2 font-bold text-brand-900 text-sm">Rp 98.000</p>
+                </a>
+
+                <!-- View More Circle -->
+                <div class="flex items-center justify-center">
+                    <a href="index.html#koleksi" class="w-16 h-16 rounded-full border-2 border-brand-500 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-all transform hover:scale-110">
+                        <i data-lucide="plus" class="w-8 h-8"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="bg-brand-500 p-1 rounded-md">
+                            <i data-lucide="book-open" class="h-5 w-5 text-brand-900"></i>
+                        </div>
+                        <span class="font-serif font-bold text-xl text-white">Pustaka Aksara</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Menerbitkan karya literatur berkualitas yang menginspirasi pembaca di seluruh Indonesia sejak 2018.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center hover:bg-brand-500 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center hover:bg-brand-500 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center hover:bg-brand-500 transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-500 mb-4 uppercase text-xs tracking-widest">Penerbitan</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Kirim Naskah</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Layanan Editor</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cetak On-Demand</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Royalti & Kontrak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-500 mb-4 uppercase text-xs tracking-widest">Toko</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Semua Koleksi</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Bestseller</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">E-Book</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Merchandise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-brand-500 mb-4 uppercase text-xs tracking-widest">Kantor</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Jl. Literasi No. 45, Kebayoran Baru, Jakarta Selatan, 12110<br><br>
+                        <span class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> halo@pustakaaksara.id</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-brand-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-500 uppercase tracking-widest">
+                    &copy; 2026 Pustaka Aksara Indonesia.
+                </p>
+                <div class="flex gap-6 text-xs text-gray-500 uppercase tracking-widest">
+                    <a href="#" class="hover:text-brand-500 transition-colors">Privasi</a>
+                    <a href="#" class="hover:text-brand-500 transition-colors">Syarat</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simple Interaction for Formats
+        const labels = document.querySelectorAll('label');
+        labels.forEach(label => {
+            label.addEventListener('click', () => {
+                labels.forEach(l => {
+                    l.classList.remove('border-brand-500');
+                    l.classList.add('border-gray-200');
+                    // Find and remove check icons if they were added dynamically
+                });
+                label.classList.add('border-brand-500');
+                label.classList.remove('border-gray-200');
+            });
+        });
+    </script>
+</body>
+</html>
