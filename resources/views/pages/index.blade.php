@@ -26,11 +26,11 @@
                     Kami adalah penerbit independen yang berdedikasi mencari, memoles, dan menerbitkan karya-karya literatur terbaik dari penulis berbakat Indonesia ke genggaman pembaca.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#koleksi" class="inline-flex justify-center items-center gap-2 bg-brand-900 hover:bg-brand-800 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
+                    <a href="#koleksi" class="inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
                         <i data-lucide="library" class="w-5 h-5"></i>
                         Jelajahi Koleksi
                     </a>
-                    <a href="#kirim-naskah" class="inline-flex justify-center items-center gap-2 bg-white hover:bg-gray-50 text-brand-900 border border-gray-200 px-8 py-3.5 rounded-full font-medium transition-all shadow-sm hover:shadow">
+                    <a href="#kirim-naskah" class="inline-flex justify-center items-center gap-2 bg-white hover:bg-gray-50 text-brand-500 border border-brand-500 px-8 py-3.5 rounded-full font-medium transition-all shadow-sm hover:shadow">
                         Pelajari Penerbitan
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
@@ -263,7 +263,7 @@
             </div>
             <form class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
                 <input type="email" placeholder="Alamat email Anda" required class="px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent min-w-[250px]">
-                <button type="submit" class="bg-brand-900 hover:bg-brand-800 text-white px-6 py-3 rounded-full font-medium transition-colors whitespace-nowrap">
+                <button type="submit" class="bg-brand-500 hover:bg-brand-700 text-white px-6 py-3 rounded-full font-medium transition-colors whitespace-nowrap">
                     Berlangganan
                 </button>
             </form>

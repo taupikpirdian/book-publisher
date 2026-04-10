@@ -12,11 +12,11 @@
                 },
                 colors: {
                     brand: {
-                        50: '#f0fdfa',
-                        100: '#ccfbf1',
-                        500: '#14b8a6', // Teal
-                        700: '#0f766e',
-                        900: '#134e4a', // Dark Teal
+                        50: '#fefce8',
+                        100: '#fef08a',
+                        500: '#eab305', // Yellow
+                        700: '#a16207',
+                        900: '#713f12', // Dark Yellow
                     },
                     paper: '#fafaf9',
                     ink: '#1c1917',

@@ -13,7 +13,7 @@
                 <a href="#koleksi" class="text-gray-600 hover:text-brand-700 font-medium transition-colors">Koleksi Buku</a>
                 <a href="#layanan" class="text-gray-600 hover:text-brand-700 font-medium transition-colors">Layanan Penulis</a>
                 <a href="#tentang" class="text-gray-600 hover:text-brand-700 font-medium transition-colors">Tentang Kami</a>
-                <a href="#kirim-naskah" class="bg-brand-700 hover:bg-brand-900 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-md hover:shadow-lg flex items-center gap-2">
+                <a href="#kirim-naskah" class="bg-brand-500 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-md hover:shadow-lg flex items-center gap-2">
                     <i data-lucide="pen-tool" class="w-4 h-4"></i>
                     Kirim Naskah
                 </a>
