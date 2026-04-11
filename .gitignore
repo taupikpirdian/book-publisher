@@ -1,5 +1,7 @@
 .env
+vendor/
 vendor/*
+vendor/composer/
 node_modules/
 public/storage/
 storage/*.key
