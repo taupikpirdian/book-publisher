@@ -52,5 +52,5 @@ RUN npm run build
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache
 
-EXPOSE 9001
+EXPOSE 9000
 CMD ["php-fpm"]

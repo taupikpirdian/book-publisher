@@ -12,7 +12,7 @@ services:
       - app_bootstrap_book_publisher:/var/www/bootstrap/cache
       - app_build_book_publisher:/var/www/public/build
     ports:
-      - "9001:9001"
+      - "9000:9000"
     networks:
       - book-publisher-network
     extra_hosts:
