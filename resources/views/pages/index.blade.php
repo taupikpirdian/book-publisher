@@ -16,14 +16,13 @@
             <div class="max-w-2xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
-                    Menerbitkan lebih dari 500+ judul buku
+                    {{ $heroSection->title }}
                 </div>
                 <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 leading-tight mb-6">
-                    Menghidupkan Cerita, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-900">Menginspirasi Dunia.</span>
+                   {{ $heroSection->title_highlight }}
                 </h1>
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Kami adalah penerbit independen yang berdedikasi mencari, memoles, dan menerbitkan karya-karya literatur terbaik dari penulis berbakat Indonesia ke genggaman pembaca.
+                   {{ $heroSection->description }}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="{{ route('koleksi') }}" class="inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
@@ -40,11 +39,11 @@
             <!-- Image/Visual Content -->
             <div class="relative lg:ml-10">
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
-                    <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tumpukan Buku Klasik" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ $heroSection->image_url }}" alt="Tumpukan Buku Klasik" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                         <div class="p-8 text-white">
-                            <p class="font-serif text-xl italic">"Buku adalah sihir portabel yang unik."</p>
-                            <p class="text-sm text-gray-300 mt-2">— Stephen King</p>
+                            <p class="font-serif text-xl italic">"{{ $heroSection->quote_text }}"</p>
+                            <p class="text-sm text-gray-300 mt-2">— {{ $heroSection->quote_author }}</p>
                         </div>
                     </div>
                 </div>
