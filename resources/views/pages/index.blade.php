@@ -84,79 +84,6 @@
                     <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">Senja di Pelabuhan Ratu</h3>
                     <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">Raka P. Dewantara</span></p>
                 </div>
-                <div class="flex items-center justify-between sm:justify-start gap-4 mt-auto">
-                    <span class="font-bold text-lg">Rp 85.000</span>
-                    <button class="text-gray-400 hover:text-brand-700" title="Tambah ke Keranjang">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Book Card 2 -->
-            <div class="group flex flex-col">
-                <div class="relative mb-6 rounded-md overflow-hidden aspect-[2/3] book-shadow mx-auto w-full max-w-[240px] transform group-hover:-translate-y-2 transition-transform duration-300">
-                    <div class="spine"></div>
-                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cover Buku 2" class="w-full h-full object-cover">
-                    <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">Bestseller</div>
-                    <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <button class="bg-white text-brand-900 px-4 py-2 rounded-full font-medium text-sm shadow-lg hover:bg-brand-50">Lihat Detail</button>
-                    </div>
-                </div>
-                <div class="text-center sm:text-left flex-grow">
-                    <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">Pengembangan Diri</div>
-                    <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">Seni Mengelola Waktu</h3>
-                    <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">Dr. Sarah Wijaya</span></p>
-                </div>
-                <div class="flex items-center justify-between sm:justify-start gap-4 mt-auto">
-                    <span class="font-bold text-lg">Rp 115.000</span>
-                    <button class="text-gray-400 hover:text-brand-700" title="Tambah ke Keranjang">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Book Card 3 -->
-            <div class="group flex flex-col">
-                <div class="relative mb-6 rounded-md overflow-hidden aspect-[2/3] book-shadow mx-auto w-full max-w-[240px] transform group-hover:-translate-y-2 transition-transform duration-300">
-                    <div class="spine"></div>
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cover Buku 3" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <button class="bg-white text-brand-900 px-4 py-2 rounded-full font-medium text-sm shadow-lg hover:bg-brand-50">Lihat Detail</button>
-                    </div>
-                </div>
-                <div class="text-center sm:text-left flex-grow">
-                    <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">Sejarah</div>
-                    <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">Jejak Rempah Nusantara</h3>
-                    <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">Ahmad Luthfi</span></p>
-                </div>
-                <div class="flex items-center justify-between sm:justify-start gap-4 mt-auto">
-                    <span class="font-bold text-lg">Rp 140.000</span>
-                    <button class="text-gray-400 hover:text-brand-700" title="Tambah ke Keranjang">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Book Card 4 -->
-            <div class="group flex flex-col">
-                <div class="relative mb-6 rounded-md overflow-hidden aspect-[2/3] book-shadow mx-auto w-full max-w-[240px] transform group-hover:-translate-y-2 transition-transform duration-300">
-                    <div class="spine"></div>
-                    <img src="https://images.unsplash.com/photo-1525505927227-6ce1c402b123?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cover Buku 4" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <button class="bg-white text-brand-900 px-4 py-2 rounded-full font-medium text-sm shadow-lg hover:bg-brand-50">Lihat Detail</button>
-                    </div>
-                </div>
-                <div class="text-center sm:text-left flex-grow">
-                    <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">Puisi</div>
-                    <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">Hujan di Bulan Juni (Edisi Khusus)</h3>
-                    <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">Maya Angelina</span></p>
-                </div>
-                <div class="flex items-center justify-between sm:justify-start gap-4 mt-auto">
-                    <span class="font-bold text-lg">Rp 75.000</span>
-                    <button class="text-gray-400 hover:text-brand-700" title="Tambah ke Keranjang">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    </button>
-                </div>
             </div>
 
         </div>
@@ -210,18 +137,18 @@
                 <i data-lucide="quote" class="w-12 h-12 text-brand-200 mb-6"></i>
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-900 mb-6">Suara dari Para Penulis Kami</h2>
                 <p class="text-lg text-gray-600 italic mb-8">
-                    "Pustaka Aksara tidak hanya sekadar mencetak buku saya, tapi mereka benar-benar merawat naskah saya layaknya anak sendiri. Proses editing yang diskusi yang hangat membuat karya saya jauh lebih matang dari draf awalnya."
+                    "{{ $testimonial->testimonial }}"
                 </p>
                 <div class="flex items-center gap-4">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Foto Penulis" class="w-14 h-14 rounded-full object-cover">
+                    <img src="{{ $testimonial->photo_path }}" alt="Foto Penulis" class="w-14 h-14 rounded-full object-cover">
                     <div>
-                        <h4 class="font-bold text-ink">Nadia Larasati</h4>
-                        <p class="text-sm text-gray-500">Penulis Novel Bestseller "Jingga"</p>
+                        <h4 class="font-bold text-ink">{{ $testimonial->name }}</h4>
+                        <p class="text-sm text-gray-500">{{ $testimonial->title }}</p>
                     </div>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Menulis" class="rounded-xl object-cover h-64 w-full shadow-md">
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Menulis" class="rounded-xl object-cover h-64 w-full shadow-md">
                 <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Buku" class="rounded-xl object-cover h-64 w-full shadow-md mt-8">
             </div>
         </div>

@@ -20,10 +20,7 @@ class TestimonialsTable
                     ->searchable(),
                 TextColumn::make('title')
                     ->searchable(),
-                ImageColumn::make('photo_url')
-                    ->label('Photo')
-                    ->square()
-                    ->size(64),
+                ImageColumn::make('photo_path'),
                 TextColumn::make('book_title')
                     ->searchable(),
                 TextColumn::make('order')

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Testimonials\Schemas;
 
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -18,10 +17,10 @@ class TestimonialForm
                     ->required(),
                 TextInput::make('title')
                     ->default(null),
-                FileUpload::make('photo_path')
-                    ->label('Photo')
-                    ->image()
-                    ->directory('testimonials')
+                TextInput::make('photo_path')
+                    ->label('Photo URL')
+                    ->placeholder('Masukkan URL gambar dari Asset Images')
+                    ->url()
                     ->default(null),
                 Textarea::make('testimonial')
                     ->required()
