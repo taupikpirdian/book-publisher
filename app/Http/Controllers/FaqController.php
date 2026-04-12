@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Faq;
+
 class FaqController extends Controller
 {
     public function index()
     {
-        return view('pages.faq');
+        $faqs = Faq::where('is_active', true)
+            ->with('category')
+            ->orderBy('order')
+            ->get();
+
+        $categoryFaqs = Category::where('type', 'faq')->get();
+
+        return view('pages.faq', compact('faqs', 'categoryFaqs'));
     }
 }

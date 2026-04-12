@@ -17,8 +17,9 @@ class FaqsTable
             ->columns([
                 TextColumn::make('question')
                     ->searchable(),
-                TextColumn::make('category_id')
-                    ->numeric()
+                TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('order')
                     ->numeric()

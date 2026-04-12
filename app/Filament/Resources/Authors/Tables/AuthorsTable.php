@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
 
 class AuthorsTable
 {
@@ -19,7 +20,7 @@ class AuthorsTable
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('photo_url')
+                ImageColumn::make('photo_url')
                     ->searchable(),
                 TextColumn::make('birth_place')
                     ->searchable(),

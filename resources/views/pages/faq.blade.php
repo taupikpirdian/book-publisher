@@ -57,171 +57,31 @@
         <!-- Category Tabs -->
         <div class="flex flex-wrap justify-center gap-2 mb-12">
             <button class="faq-tab active px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-500 text-brand-900" data-category="all">Semua</button>
-            <button class="faq-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-gray-100 text-gray-600 hover:bg-brand-50" data-category="penerbitan">Penerbitan</button>
-            <button class="faq-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-gray-100 text-gray-600 hover:bg-brand-50" data-category="royalti">Royalti</button>
-            <button class="faq-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-gray-100 text-gray-600 hover:bg-brand-50" data-category="teknis">Teknis</button>
-            <button class="faq-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-gray-100 text-gray-600 hover:bg-brand-50" data-category="umum">Umum</button>
+            @foreach($categoryFaqs as $category)
+                <button class="faq-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-gray-100 text-gray-600 hover:bg-brand-50" data-category="{{ Str::slug($category->name) }}">{{ $category->name }}</button>
+            @endforeach
         </div>
 
         <!-- FAQ List -->
         <div class="space-y-4" id="faq-list">
-            
-            <!-- FAQ Item 1 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="penerbitan">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Bagaimana cara mengirim naskah ke Pustaka Aksara?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Anda dapat mengirim naskah melalui portal kami di halaman <a href="#" class="text-brand-500 hover:underline font-medium">Kirim Naskah</a>. Pastikan naskah Anda sudah dalam format .doc atau .docx, dilengkapi sinopsis singkat, dan biodata penulis. Tim kami akan merespons dalam 14 hari kerja.
+            @forelse($faqs as $faq)
+                <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="{{ $faq->category ? Str::slug($faq->category->name) : 'umum' }}">
+                    <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
+                        <span class="font-bold text-brand-900 pr-4">{{ $faq->question }}</span>
+                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer bg-white">
+                        <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                            {!! nl2br(e($faq->answer)) !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- FAQ Item 2 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="penerbitan">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apa perbedaan antara penerbitan tradisional dan self-publishing?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Pada <strong>penerbitan tradisional</strong>, seluruh biaya produksi ditanggung oleh penerbit dan penulis menerima royalti sekitar 10%. Seleksi naskah sangat ketat. Pada <strong>self-publishing</strong>, penulis menanggung biaya produksi tetapi memiliki kendali penuh atas proses kreatif dan mendapatkan keuntungan yang lebih besar setelah biaya operasional.
-                    </div>
+            @empty
+                <div class="text-center py-12 text-gray-500">
+                    <i data-lucide="help-circle" class="w-16 h-16 mx-auto mb-4 text-gray-300"></i>
+                    <p class="text-lg">Belum ada FAQ yang tersedia.</p>
                 </div>
-            </div>
-
-            <!-- FAQ Item 3 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="penerbitan">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Berapa lama proses penerbitan dari naskah hingga jadi buku?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Proses penerbitan biasanya memakan waktu <strong>3-6 bulan</strong>, tergantung pada kompleksitas naskah, revisi yang diperlukan, dan antrean produksi. Naskah yang sudah final tanpa banyak revisi dapat diselesaikan lebih cepat, sekitar 2-3 bulan.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 4 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="royalti">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Bagaimana sistem royalti untuk penulis?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Untuk penerbitan tradisional, penulis mendapatkan royalti <strong>10% dari harga jual buku</strong> untuk setiap eksemplar yang terjual. Pembayaran royalti dilakukan setiap 6 bulan sekali (semesteran) disertai laporan penjualan detail. Untuk self-publishing, penulis mendapatkan <strong>hingga 100% keuntungan bersih</strong> setelah dikurangi biaya produksi dan operasional.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 5 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="royalti">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Kapan penulis menerima laporan penjualan?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Laporan penjualan dikirimkan setiap <strong>6 bulan sekali</strong>, yaitu pada bulan Januari untuk periode Juli-Desember tahun sebelumnya, dan bulan Juli untuk periode Januari-Juni tahun berjalan. Pembayaran royalti ditransfer maksimal 30 hari setelah laporan dikirim.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 6 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="teknis">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apakah penulis harus menyediakan ISBN sendiri?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        <strong>Tidak perlu.</strong> Pustaka Aksara akan mengurus pengurusan ISBN, hak cipta, dan katalogisasi ke Perpustakaan Nasional secara gratis untuk semua buku yang diterbitkan melalui jalur penerbitan tradisional maupun self-publishing.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 7 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="teknis">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Format naskah seperti apa yang diterima?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Kami menerima naskah dalam format <strong>Microsoft Word (.doc/.docx)</strong> atau <strong>Google Docs</strong>. Gunakan font Times New Roman ukuran 12, spasi 1.5, dan margin standar. Untuk naskah fiksi, pastikan sudah melalui proses swa-edit minimal. Kami juga menerima naskah non-fiksi dengan outline yang jelas dan referensi lengkap.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 8 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="teknis">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apakah buku akan didistribusikan ke toko buku fisik?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        <strong>Ya.</strong> Buku yang diterbitkan melalui jalur tradisional akan didistribusikan ke jaringan toko buku besar nasional seperti Gramedia, Gunung Agung, dan toko buku regional. Buku juga akan tersedia di platform e-commerce seperti Tokopedia, Shopee, dan marketplace buku online.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 9 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="umum">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apakah saya tetap memegang hak cipta atas naskah saya?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        <strong>Ya, sepenuhnya.</strong> Penulis tetap memegang hak cipta atas karya mereka. Pustaka Aksara hanya mendapatkan hak eksklusif untuk menerbitkan dan mendistribusikan buku sesuai dengan perjanjian kerjasama yang ditandatangani. Detail hak dan kewajiban akan dijelaskan dalam kontrak penerbitan.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 10 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="umum">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Bagaimana cara menghubungi tim editorial?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Anda dapat menghubungi tim editorial melalui email <a href="mailto:editorial@pustakaaksara.id" class="text-brand-500 hover:underline font-medium">editorial@pustakaaksara.id</a> atau WhatsApp di nomor <strong>(021) 555-0123</strong> pada jam kerja (Senin-Jumat, 09.00-17.00 WIB). Kami juga menyediakan form konsultasi di halaman <a href="{{ route('layanan') }}" class="text-brand-500 hover:underline font-medium">Layanan Penulis</a>.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 11 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="penerbitan">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apakah ada biaya untuk proses editing?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        Untuk <strong>penerbitan tradisional</strong>, biaya editing sudah ditanggung oleh penerbit. Untuk <strong>self-publishing</strong>, biaya editing termasuk dalam paket penerbitan yang Anda pilih. Kami menawarkan berbagai paket layanan editing yang dapat disesuaikan dengan kebutuhan dan budget Anda.
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Item 12 -->
-            <div class="faq-item border border-gray-200 rounded-xl overflow-hidden" data-category="umum">
-                <button class="faq-toggle w-full flex items-center justify-between p-6 text-left bg-white hover:bg-brand-50/50 transition-colors">
-                    <span class="font-bold text-brand-900 pr-4">Apakah penulis mendapatkan buku gratis setelah terbit?</span>
-                    <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-brand-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-answer bg-white">
-                    <div class="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                        <strong>Ya.</strong> Setiap penulis akan mendapatkan <strong>10-20 eksemplar gratis</strong> (tergantung jenis kontrak) untuk kebutuhan promosi dan koleksi pribadi. Penulis juga berhak membeli buku tambahan dengan harga diskon khusus penulis sebesar <strong>40-50% dari harga jual</strong>.
-                    </div>
-                </div>
-            </div>
-
+            @endforelse
         </div>
 
         <!-- Still Have Questions -->
