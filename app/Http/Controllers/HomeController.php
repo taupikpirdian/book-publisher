@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\CompanyValue;
 use App\Models\HeroSection;
 use App\Models\Newsletter;
 use App\Models\Testimonial;
@@ -14,6 +15,7 @@ class HomeController extends Controller
     {
         $heroSection = HeroSection::active()->first();
         $testimonial = Testimonial::where('is_featured', true)->where('is_active', true)->first();
+        $companyValues = CompanyValue::active()->get();
 
         if ($request->query('success') === 'newsletter') {
             session()->flash('success', 'Terima kasih! Anda berhasil berlangganan buletin kami.');
@@ -25,7 +27,7 @@ class HomeController extends Controller
 
         $books = Book::where('is_active', true)->where('is_featured', true)->latest()->take(4)->get();
 
-        return view('pages.index', compact('heroSection', 'testimonial', 'books'));
+        return view('pages.index', compact('heroSection', 'testimonial', 'books', 'companyValues'));
     }
 
     public function subscribeNewsletter(Request $request)

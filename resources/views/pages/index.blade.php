@@ -137,7 +137,17 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
+            @forelse($companyValues as $value)
+            <!-- Feature {{ $loop->iteration }} -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6 text-brand-700">
+                    <i data-lucide="{{ $value->icon }}" class="w-7 h-7"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-ink mb-3">{{ $value->title }}</h3>
+                <p class="text-gray-600 leading-relaxed">{{ $value->description }}</p>
+            </div>
+            @empty
+            <!-- Default fallback features -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6 text-brand-700">
                     <i data-lucide="edit-3" class="w-7 h-7"></i>
@@ -146,7 +156,6 @@
                 <p class="text-gray-600 leading-relaxed">Tim editor berpengalaman kami akan membantu memoles naskah Anda tanpa menghilangkan suara dan gaya penulisan asli Anda.</p>
             </div>
 
-            <!-- Feature 2 -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6 text-brand-700">
                     <i data-lucide="truck" class="w-7 h-7"></i>
@@ -155,7 +164,6 @@
                 <p class="text-gray-600 leading-relaxed">Buku Anda akan didistribusikan ke jaringan toko buku besar nasional maupun platform digital (e-book) ternama.</p>
             </div>
 
-            <!-- Feature 3 -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6 text-brand-700">
                     <i data-lucide="pie-chart" class="w-7 h-7"></i>
@@ -163,6 +171,7 @@
                 <h3 class="font-serif text-xl font-bold text-ink mb-3">Royalti Transparan</h3>
                 <p class="text-gray-600 leading-relaxed">Kami menawarkan persentase royalti yang kompetitif dengan laporan penjualan berkala yang jelas dan tepat waktu.</p>
             </div>
+            @endforelse
         </div>
     </div>
 </section>
