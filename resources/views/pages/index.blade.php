@@ -98,7 +98,7 @@
                 <h2 class="font-serif text-3xl font-bold text-brand-900 mb-4">Rilis Terbaru Kami</h2>
                 <p class="text-gray-600">Temukan karya fiksi dan non-fiksi terbaru yang sedang menjadi perbincangan hangat minggu ini.</p>
             </div>
-            <a href="#" class="inline-flex items-center gap-2 text-brand-700 font-medium hover:text-brand-900 transition-colors group">
+            <a href="{{ route('koleksi') }}" class="inline-flex items-center gap-2 text-brand-700 font-medium hover:text-brand-900 transition-colors group">
                 Lihat Semua Buku
                 <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
             </a>

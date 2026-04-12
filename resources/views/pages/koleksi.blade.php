@@ -211,16 +211,21 @@
     </div>
 </main>
 
-<!-- Simple Newsletter -->
-<section class="bg-brand-500 py-12 mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="text-center md:text-left">
-            <h2 class="font-serif text-2xl font-bold text-brand-900 mb-2">Jangan Lewatkan Buku Baru</h2>
-            <p class="text-brand-900/70 text-sm">Dapatkan update rilis terbaru dan promo eksklusif setiap bulannya.</p>
-        </div>
-        <div class="flex w-full max-w-md gap-2">
-            <input type="email" placeholder="Alamat email Anda" class="flex-grow px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-900/20">
-            <button class="bg-brand-900 text-white px-6 py-3 rounded-xl font-bold text-sm whitespace-nowrap">Langganan</button>
+<!-- Newsletter -->
+<section class="py-16 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-brand-50 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="max-w-xl">
+                <h3 class="font-serif text-2xl font-bold text-brand-900 mb-2">Jadilah yang Pertama Tahu!</h3>
+                <p class="text-gray-600">Berlangganan buletin kami untuk info rilis buku terbaru, diskon spesial, dan tips menulis.</p>
+            </div>
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
+                @csrf
+                <input type="email" name="email" placeholder="Alamat email Anda" required class="px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent min-w-[250px]">
+                <button type="submit" class="bg-brand-500 hover:bg-brand-700 text-white px-6 py-3 rounded-full font-medium transition-colors whitespace-nowrap">
+                    Berlangganan
+                </button>
+            </form>
         </div>
     </div>
 </section>
