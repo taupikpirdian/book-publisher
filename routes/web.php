@@ -20,6 +20,7 @@ Route::get('/assets/{path}', function ($path) {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/newsletter/subscribe', [HomeController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
 Route::get('/koleksi', [KoleksiController::class, 'index'])->name('koleksi');
+Route::get('/koleksi/api', [KoleksiController::class, 'api'])->name('koleksi.api');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
 Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail');
