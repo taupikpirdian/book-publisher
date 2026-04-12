@@ -22,6 +22,11 @@ class AssetImageResource extends Resource
         return Heroicon::OutlinedPhoto;
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function getModelLabel(): string
     {
         return 'Asset Image';

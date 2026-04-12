@@ -54,6 +54,12 @@ class BooksTable
                     ->boolean(),
                 IconColumn::make('is_active')
                     ->boolean(),
+                IconColumn::make('has_seo')
+                    ->label('SEO')
+                    ->getStateUsing(fn ($record) => filled($record->meta_title) || filled($record->meta_description))
+                    ->boolean()
+                    ->color(fn ($state): string => $state ? 'success' : 'warning')
+                    ->icon(fn ($state): string => $state ? 'heroicon-o-check-circle' : 'heroicon-o-exclamation-triangle'),
                 TextColumn::make('order')
                     ->numeric()
                     ->sortable(),

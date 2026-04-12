@@ -25,6 +25,11 @@ class BookResource extends Resource
         return BookForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return BooksTable::configure($table);

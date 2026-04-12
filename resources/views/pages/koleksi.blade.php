@@ -367,7 +367,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${book.category ? `<p class="text-[10px] font-bold text-brand-600 uppercase mb-1">${book.category.name}</p>` : ''}
                         <h3 class="font-serif font-bold text-sm sm:text-base leading-snug group-hover:text-brand-500 transition-colors line-clamp-2 mb-1">${book.title}</h3>
                         ${book.author ? `<p class="text-xs text-gray-500 mb-2">${book.author.name}</p>` : ''}
-                        ${book.price ? `<p class="font-bold text-brand-900">${book.formatted_price}</p>` : ''}
                     </div>
                 </div>
             `;

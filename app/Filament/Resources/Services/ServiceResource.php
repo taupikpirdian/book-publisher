@@ -25,6 +25,11 @@ class ServiceResource extends Resource
         return ServiceForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return ServicesTable::configure($table);

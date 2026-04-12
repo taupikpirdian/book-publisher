@@ -25,6 +25,11 @@ class AboutPageResource extends Resource
         return AboutPageForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return AboutPagesTable::configure($table);

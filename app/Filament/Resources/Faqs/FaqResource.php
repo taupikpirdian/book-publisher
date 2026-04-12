@@ -25,6 +25,11 @@ class FaqResource extends Resource
         return FaqForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return FaqsTable::configure($table);

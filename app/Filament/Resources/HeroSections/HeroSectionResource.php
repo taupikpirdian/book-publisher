@@ -25,6 +25,11 @@ class HeroSectionResource extends Resource
         return HeroSectionForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return HeroSectionsTable::configure($table);

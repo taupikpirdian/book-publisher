@@ -25,6 +25,11 @@ class TeamMemberResource extends Resource
         return TeamMemberForm::configure($schema);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Content Management';
+    }
+
     public static function table(Table $table): Table
     {
         return TeamMembersTable::configure($table);

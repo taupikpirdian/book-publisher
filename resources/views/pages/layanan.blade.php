@@ -19,22 +19,19 @@
             <span class="inline-block px-4 py-1.5 bg-brand-100 text-brand-700 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
                 Mulai Karier Menulismu
             </span>
-            <h1 class="font-serif text-4xl lg:text-6xl font-black mb-6 leading-tight">Ubah Ide Menjadi Karya Abadi</h1>
+            <h1 class="font-serif text-4xl lg:text-6xl font-black mb-6 leading-tight">{{$service->title}}</h1>
             <p class="text-lg text-gray-600 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Kami percaya setiap orang memiliki cerita unik untuk diceritakan. Pustaka Aksara hadir sebagai mitra terpercaya bagi para penulis untuk melahirkan karya berkualitas tinggi.
+                {{ $service->description }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button class="bg-brand-900 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
+                <a href="https://wa.me/6285846132417?text=Halo%20Pustaka%20Aksara,%20saya%20ingin%20konsultasi%20mengenai%20layanan%20penerbitan.%20Mohon%20informasi%20lebih%20lanjut.%20Terima%20kasih." target="_blank" class="bg-brand-900 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
                     Konsultasi Gratis <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
-                <button class="bg-white border-2 border-brand-500 text-brand-900 px-8 py-4 rounded-xl font-bold hover:bg-brand-50 transition-all">
-                    Unduh Panduan Penulis
-                </button>
+                </a>
             </div>
         </div>
         <div class="hidden lg:block relative">
             <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl rotate-3 transform transition-transform hover:rotate-0 duration-500">
-                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Penulis sedang menulis" class="w-full">
+                <img src="{{ $service->icon }}" alt="Penulis sedang menulis" class="w-full">
             </div>
             {{-- <div class="absolute -bottom-6 -left-6 bg-brand-500 p-8 rounded-2xl shadow-xl z-20">
                 <p class="text-3xl font-black text-brand-900">500+</p>
@@ -53,6 +50,41 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
+            @forelse($publishingPaths as $path)
+            <!-- Service {{ $loop->iteration }} -->
+            <div class="service-card p-8 rounded-2xl {{ $path->is_popular ? 'bg-brand-50 border-2 border-brand-500 shadow-lg relative' : 'bg-paper border border-gray-100 hover:border-brand-500 shadow-sm' }} flex flex-col">
+                @if($path->is_popular)
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-500 text-brand-900 text-[10px] font-black uppercase px-4 py-1 rounded-full tracking-widest">Paling Populer</div>
+                @endif
+                <div class="w-14 h-14 {{ $path->is_popular ? 'bg-brand-500 text-brand-900' : 'bg-brand-100 text-brand-600' }} rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="{{ $path->icon }}" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4 {{ $path->is_popular ? 'text-brand-900' : '' }}">{{ $path->title }}</h3>
+                <p class="{{ $path->is_popular ? 'text-gray-600' : 'text-gray-500' }} text-sm mb-6 flex-grow">{{ strip_tags($path->description) }}</p>
+                
+                @if(count($path->features_list) > 0)
+                <ul class="space-y-3 mb-8 text-sm">
+                    @foreach($path->features_list as $key => $feature)
+                    <li class="flex items-center gap-2 font-medium">
+                        <i data-lucide="check" class="w-4 h-4 {{ $path->is_popular ? 'text-brand-500' : 'text-green-500' }}"></i>
+                        {{ is_string($key) ? $key : $feature }}
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+                
+                @if($path->button_url)
+                <a href="{{ $path->button_url }}" target="_blank" class="w-full py-3 {{ $path->is_popular ? 'bg-brand-500 text-brand-900 hover:bg-brand-600' : ($loop->iteration % 3 === 0 ? 'border-2 border-brand-900 text-brand-900 hover:bg-brand-900 hover:text-white' : 'bg-brand-900 text-white hover:bg-brand-700') }} rounded-lg font-bold transition-colors text-center">
+                    {{ $path->button_text }}
+                </a>
+                @else
+                <button class="w-full py-3 {{ $path->is_popular ? 'bg-brand-500 text-brand-900 hover:bg-brand-600' : ($loop->iteration % 3 === 0 ? 'border-2 border-brand-900 text-brand-900 hover:bg-brand-900 hover:text-white' : 'bg-brand-900 text-white hover:bg-brand-700') }} rounded-lg font-bold transition-colors">
+                    {{ $path->button_text }}
+                </button>
+                @endif
+            </div>
+            @empty
+            <!-- Fallback if no data -->
             <!-- Service 1 -->
             <div class="service-card p-8 rounded-2xl bg-paper border border-gray-100 hover:border-brand-500 shadow-sm flex flex-col">
                 <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 mb-6">
@@ -98,6 +130,7 @@
                 </ul>
                 <button class="w-full py-3 border-2 border-brand-900 text-brand-900 rounded-lg font-bold hover:bg-brand-900 hover:text-white transition-colors">Hubungi Kami</button>
             </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -142,33 +175,6 @@
                 </div>
                 <h4 class="font-bold mb-3">Penerbitan</h4>
                 <p class="text-sm text-gray-400">Buku dicetak, didistribusikan, dan dipromosikan ke seluruh Indonesia.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonial Section -->
-<section class="py-24 bg-paper">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-3xl p-10 md:p-20 shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-12">
-            <div class="w-full md:w-1/3">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Penulis Sukses" class="rounded-2xl shadow-lg border-8 border-brand-50">
-            </div>
-            <div class="w-full md:w-2/3">
-                <div class="text-brand-500 mb-6 flex gap-1">
-                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                </div>
-                <p class="text-xl md:text-2xl font-serif italic text-gray-600 mb-8 leading-relaxed">
-                    "Pustaka Aksara bukan sekadar penerbit, mereka adalah keluarga. Dari naskah berantakan hingga menjadi novel bestseller, tim mereka membimbing saya dengan penuh kesabaran."
-                </p>
-                <div>
-                    <p class="font-bold text-lg text-brand-900">Anindya Putri</p>
-                    <p class="text-brand-500 font-bold uppercase text-xs tracking-widest">Penulis Novel 'Gema di Ujung Pagi'</p>
-                </div>
             </div>
         </div>
     </div>
