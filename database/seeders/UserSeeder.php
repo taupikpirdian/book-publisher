@@ -17,17 +17,9 @@ class UserSeeder extends Seeder
         // Create admin user
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@bookpublisher.com',
+            'email' => 'admin@penerbitskt.naramakna.id',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-        ]);
-
-        // Create demo user
-        User::create([
-            'name' => 'Demo User',
-            'email' => 'demo@bookpublisher.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('SecureAdmin123!@#'),
         ]);
     }
 }
