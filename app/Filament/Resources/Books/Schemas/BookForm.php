@@ -17,8 +17,6 @@ class BookForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 TextInput::make('author_id')
                     ->required()
                     ->numeric(),

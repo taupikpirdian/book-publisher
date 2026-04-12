@@ -16,10 +16,6 @@ class HeroSectionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('badge_text')
-                    ->searchable(),
-                TextColumn::make('badge_icon')
-                    ->searchable(),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('title_highlight')

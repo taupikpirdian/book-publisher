@@ -15,8 +15,6 @@ class ServiceForm
             ->components([
                 TextInput::make('title')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),

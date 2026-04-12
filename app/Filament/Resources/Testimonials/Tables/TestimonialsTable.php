@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -19,8 +20,10 @@ class TestimonialsTable
                     ->searchable(),
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('photo_url')
-                    ->searchable(),
+                ImageColumn::make('photo_url')
+                    ->label('Photo')
+                    ->square()
+                    ->size(64),
                 TextColumn::make('book_title')
                     ->searchable(),
                 TextColumn::make('order')

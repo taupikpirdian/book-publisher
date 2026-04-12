@@ -15,8 +15,6 @@ class CategoryForm
             ->components([
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 Select::make('type')
                     ->options(['book' => 'Book', 'faq' => 'Faq'])
                     ->default('book')

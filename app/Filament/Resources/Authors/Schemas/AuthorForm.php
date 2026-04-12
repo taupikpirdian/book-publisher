@@ -16,8 +16,6 @@ class AuthorForm
             ->components([
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
                 TextInput::make('photo_url')
                     ->url()
                     ->default(null),
