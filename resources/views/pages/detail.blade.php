@@ -33,19 +33,7 @@
                 <div class="relative group cursor-zoom-in">
                     <div class="aspect-[2/3] relative rounded-r-lg overflow-hidden book-shadow">
                         <div class="spine-effect"></div>
-                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Senja di Pelabuhan Ratu" class="w-full h-full object-cover">
-                    </div>
-                    <div class="mt-6 grid grid-cols-4 gap-4">
-                        <button class="aspect-square border-2 border-brand-500 rounded-md overflow-hidden bg-white">
-                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail 1" class="w-full h-full object-cover opacity-100">
-                        </button>
-                        <button class="aspect-square border border-gray-200 rounded-md overflow-hidden bg-white hover:border-brand-500 transition-colors">
-                            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail 2" class="w-full h-full object-cover opacity-60">
-                        </button>
-                        <div class="aspect-square border border-gray-200 rounded-md flex flex-col items-center justify-center text-gray-400 text-xs">
-                            <i data-lucide="image" class="w-5 h-5 mb-1"></i>
-                            Intip Isi
-                        </div>
+                        <img src="{{ $book->cover_image }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -54,15 +42,11 @@
         <!-- Right: Book Details -->
         <div class="lg:col-span-7">
             <nav class="flex mb-4 text-xs font-bold uppercase tracking-widest text-brand-700 gap-2">
-                <a href="#" class="hover:text-brand-900">Katalog</a>
-                <span>/</span>
-                <a href="#" class="hover:text-brand-900">Fiksi</a>
-                <span>/</span>
-                <span class="text-gray-400">Novel</span>
+                <span class="text-gray-400">{{ $book->category->name ?? 'Kategori Tidak Diketahui' }}</span>
             </nav>
 
-            <h1 class="font-serif text-3xl md:text-5xl font-bold text-brand-900 mb-2 leading-tight">Senja di Pelabuhan Ratu</h1>
-            <p class="text-lg md:text-xl text-gray-500 mb-6">Oleh <a href="#" class="text-brand-700 hover:underline font-medium">Raka P. Dewantara</a></p>
+            <h1 class="font-serif text-3xl md:text-5xl font-bold text-brand-900 mb-2 leading-tight">{{ $book->title }}</h1>
+            <p class="text-lg md:text-xl text-gray-500 mb-6">Oleh <a href="#" class="text-brand-700 hover:underline font-medium">{{ $book->author->name }}</a></p>
 
             {{-- <div class="flex items-center gap-4 mb-8">
                 <div class="flex text-brand-500">
@@ -123,7 +107,7 @@
                 <div class="flex gap-8">
                     <button id="tab-sinopsis" onclick="switchTab('sinopsis')" class="pb-4 text-sm font-bold uppercase tracking-wider tab-active">Sinopsis</button>
                     <button id="tab-detail" onclick="switchTab('detail')" class="pb-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-ink transition-colors">Detail Buku</button>
-                    <button id="tab-penulis" onclick="switchTab('penulis')" class="pb-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-ink transition-colors">Penulis</button>
+                    {{-- <button id="tab-penulis" onclick="switchTab('penulis')" class="pb-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-ink transition-colors">Penulis</button> --}}
                 </div>
             </div>
 
@@ -131,10 +115,7 @@
             <div id="content-sinopsis" class="tab-content">
                 <div class="prose prose-sm text-gray-600 leading-relaxed max-w-none">
                     <p class="mb-4">
-                        Berlatar di pesisir selatan Jawa yang mistis, <strong>Senja di Pelabuhan Ratu</strong> mengisahkan tentang Arka, seorang jurnalis yang mencoba mengungkap misteri hilangnya kapal-kapal nelayan di malam purnama. Namun, pencariannya justru membawanya pada pertemuan tak terduga dengan seorang wanita misterius di tepi tebing yang tampaknya tahu lebih banyak tentang ombak daripada manusia manapun.
-                    </p>
-                    <p>
-                        Sebuah narasi tentang kehilangan, harapan, dan rahasia yang disimpan oleh samudera. Raka P. Dewantara kembali dengan gaya bahasa yang puitis namun tetap tajam, mengajak pembaca menyelami kedalaman emosi sedalam Samudera Hindia.
+                        {!! $book->synopsis !!}
                     </p>
                 </div>
             </div>
@@ -145,50 +126,50 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Judul</p>
-                            <p class="text-sm font-bold">Senja di Pelabuhan Ratu</p>
+                            <p class="text-sm font-bold">{{ $book->title }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Penulis</p>
-                            <p class="text-sm font-bold">Raka P. Dewantara</p>
+                            <p class="text-sm font-bold">{{ $book->author->name }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">ISBN</p>
-                            <p class="text-sm font-bold">978-602-123-456-7</p>
+                            <p class="text-sm font-bold">{{ $book->isbn }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Penerbit</p>
-                            <p class="text-sm font-bold">Pustaka Nusantara</p>
+                            <p class="text-sm font-bold">{{ $book->publisher }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Tanggal Terbit</p>
-                            <p class="text-sm font-bold">Maret 2026</p>
+                            <p class="text-sm font-bold">{{ $book->published_at }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Jumlah Halaman</p>
-                            <p class="text-sm font-bold">320 halaman</p>
+                            <p class="text-sm font-bold">{{ $book->pages }} halaman</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Bahasa</p>
-                            <p class="text-sm font-bold">Indonesia</p>
+                            <p class="text-sm font-bold">{{ $book->language }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Dimensi</p>
-                            <p class="text-sm font-bold">14 x 20.5 cm</p>
+                            <p class="text-sm font-bold">{{ $book->dimensions }}</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Berat</p>
-                            <p class="text-sm font-bold">350 gram</p>
+                            <p class="text-sm font-bold">{{ $book->weight }} gram</p>
                         </div>
                         <div>
                             <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Jenis Sampul</p>
-                            <p class="text-sm font-bold">Soft Cover</p>
+                            <p class="text-sm font-bold">{{ $book->cover_type }}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Tab Content: Penulis -->
-            <div id="content-penulis" class="tab-content hidden">
+            {{-- <div id="content-penulis" class="tab-content hidden">
                 <div class="prose prose-sm text-gray-600 leading-relaxed max-w-none">
                     <div class="flex items-start gap-6 mb-6">
                         <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
@@ -213,25 +194,25 @@
                         Selain menulis, Raka juga aktif mengajar di berbagai workshop penulisan kreatif dan sering menjadi pembicara di festival sastra nasional maupun internasional.
                     </p>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Book Metadata Quick Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-gray-100">
                 <div>
                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">ISBN</p>
-                    <p class="text-sm font-bold">978-602-123-456-7</p>
+                    <p class="text-sm font-bold">{{ $book->isbn }}</p>
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Halaman</p>
-                    <p class="text-sm font-bold">320 Hlm</p>
+                    <p class="text-sm font-bold">{{ $book->pages }} Hlm</p>
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Terbit</p>
-                    <p class="text-sm font-bold">Maret 2026</p>
+                    <p class="text-sm font-bold">{{ $book->published_at }}</p>
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Bahasa</p>
-                    <p class="text-sm font-bold">Indonesia</p>
+                    <p class="text-sm font-bold">{{ $book->language }}</p>
                 </div>
             </div>
         </div>
@@ -275,14 +256,15 @@ function switchTab(tabName) {
 
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             <!-- Related Item 1 -->
+            @foreach($books as $relatedBook)
             <a href="#" class="group">
                 <div class="aspect-[2/3] bg-white rounded shadow-sm overflow-hidden mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Buku Lain" class="w-full h-full object-cover">
+                    <img src="{{ $relatedBook->cover_image }}" alt="Buku Lain" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">Jejak Rempah Nusantara</h3>
-                <p class="text-xs text-gray-500">Ahmad Luthfi</p>
-                <p class="mt-2 font-bold text-brand-900 text-sm">Rp 140.000</p>
+                <h3 class="font-serif font-bold text-sm text-brand-900 line-clamp-1 group-hover:text-brand-500">{{ $relatedBook->title }}</h3>
+                <p class="text-xs text-gray-500">{{ $relatedBook->author->name }}</p>
             </a>
+            @endforeach
 
             <!-- View More Circle -->
             <div class="flex items-center justify-center">

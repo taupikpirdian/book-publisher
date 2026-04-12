@@ -106,24 +106,24 @@
 
         <!-- Books Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            
             <!-- Book Card 1 -->
+            @foreach ($books as $book)
             <div class="group flex flex-col">
                 <div class="relative mb-6 rounded-md overflow-hidden aspect-[2/3] book-shadow mx-auto w-full max-w-[240px] transform group-hover:-translate-y-2 transition-transform duration-300">
                     <div class="spine"></div>
-                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cover Buku 1" class="w-full h-full object-cover">
+                    <img src="{{ $book->cover_image }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                     <!-- Overlay -->
                     <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <button class="bg-white text-brand-900 px-4 py-2 rounded-full font-medium text-sm shadow-lg hover:bg-brand-50">Lihat Detail</button>
+                        <a href="{{ route('detail', $book->slug) }}" class="bg-white text-brand-900 px-4 py-2 rounded-full font-medium text-sm shadow-lg hover:bg-brand-50">Lihat Detail</a>
                     </div>
                 </div>
                 <div class="text-center sm:text-left flex-grow">
-                    <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">Novel Fiksi</div>
-                    <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">Senja di Pelabuhan Ratu</h3>
-                    <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">Raka P. Dewantara</span></p>
+                    <div class="text-xs text-brand-700 font-semibold uppercase tracking-wider mb-2">{{ $book->category->name ?? 'Kategori Tidak Diketahui' }}</div>
+                    <h3 class="font-serif font-bold text-lg text-ink leading-tight mb-1 group-hover:text-brand-700 transition-colors">{{ $book->title }}</h3>
+                    <p class="text-gray-500 text-sm mb-3">Oleh <span class="font-medium text-gray-700">{{ $book->author->name }}</span></p>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </div>
 </section>

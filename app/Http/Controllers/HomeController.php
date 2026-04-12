@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\HeroSection;
 use App\Models\Newsletter;
 use App\Models\Testimonial;
@@ -22,7 +23,9 @@ class HomeController extends Controller
             session()->flash('error', 'Email sudah terdaftar atau tidak valid.');
         }
 
-        return view('pages.index', compact('heroSection', 'testimonial'));
+        $books = Book::where('is_active', true)->where('is_featured', true)->latest()->take(4)->get();
+
+        return view('pages.index', compact('heroSection', 'testimonial', 'books'));
     }
 
     public function subscribeNewsletter(Request $request)

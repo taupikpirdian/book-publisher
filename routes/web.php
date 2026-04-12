@@ -22,5 +22,5 @@ Route::post('/newsletter/subscribe', [HomeController::class, 'subscribeNewslette
 Route::get('/koleksi', [KoleksiController::class, 'index'])->name('koleksi');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
-Route::get('/detail/{slug?}', [DetailController::class, 'index'])->name('detail');
+Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
