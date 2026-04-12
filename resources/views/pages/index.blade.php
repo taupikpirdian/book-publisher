@@ -1,5 +1,43 @@
 @extends('layouts.app')
 @section('content')
+<!-- Floating Notification -->
+@if(session('success') || session('error'))
+    <div id="notification" class="fixed top-4 right-4 z-50 max-w-sm animate-bounce">
+        <div class="bg-white border-l-4 rounded-lg shadow-xl p-4 flex items-start gap-3 {{ session('success') ? 'border-green-500' : 'border-red-500' }}">
+            <div class="flex-shrink-0">
+                @if(session('success'))
+                    <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                @else
+                    <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                @endif
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-medium text-gray-900">{{ session('success') ?: session('error') }}</p>
+            </div>
+            <button onclick="document.getElementById('notification').style.display='none'" class="flex-shrink-0 text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+        // Auto hide notification after 5 seconds
+        setTimeout(() => {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }
+        }, 5000);
+    </script>
+@endif
+
 <!-- Hero Section -->
 <section id="beranda" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
     <!-- Background Decoration -->
@@ -148,7 +186,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Menulis" class="rounded-xl object-cover h-64 w-full shadow-md">
+                {{-- <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Menulis" class="rounded-xl object-cover h-64 w-full shadow-md"> --}}
                 <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Buku" class="rounded-xl object-cover h-64 w-full shadow-md mt-8">
             </div>
         </div>
@@ -187,8 +225,9 @@
                 <h3 class="font-serif text-2xl font-bold text-brand-900 mb-2">Jadilah yang Pertama Tahu!</h3>
                 <p class="text-gray-600">Berlangganan buletin kami untuk info rilis buku terbaru, diskon spesial, dan tips menulis.</p>
             </div>
-            <form class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
-                <input type="email" placeholder="Alamat email Anda" required class="px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent min-w-[250px]">
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
+                @csrf
+                <input type="email" name="email" placeholder="Alamat email Anda" required class="px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent min-w-[250px]">
                 <button type="submit" class="bg-brand-500 hover:bg-brand-700 text-white px-6 py-3 rounded-full font-medium transition-colors whitespace-nowrap">
                     Berlangganan
                 </button>

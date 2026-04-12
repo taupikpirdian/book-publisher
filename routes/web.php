@@ -18,6 +18,7 @@ Route::get('/assets/{path}', function ($path) {
 })->where('path', '.*');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/newsletter/subscribe', [HomeController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
 Route::get('/koleksi', [KoleksiController::class, 'index'])->name('koleksi');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
