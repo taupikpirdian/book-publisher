@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutPage;
+
 class TentangController extends Controller
 {
     public function index()
     {
-        return view('pages.tentang');
+        $aboutUs = AboutPage::where('is_active', true)->first();
+        return view('pages.tentang', compact('aboutUs'));
     }
 }

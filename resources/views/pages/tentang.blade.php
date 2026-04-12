@@ -23,22 +23,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:grid lg:grid-cols-2 gap-16 items-center">
             <div class="relative mb-12 lg:mb-0">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Perpustakaan klasik" class="rounded-3xl shadow-2xl relative z-10">
+                <img src="{{ $aboutUs->hero_image }}" alt="Perpustakaan klasik" class="rounded-3xl shadow-2xl relative z-10">
                 <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-500 rounded-3xl -z-0 opacity-20"></div>
             </div>
             <div>
                 <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-4 block">Kisah Kami</span>
-                <h1 class="font-serif text-4xl lg:text-5xl font-black mb-8 leading-tight">Menghidupkan Kata, Mengabadikan Makna.</h1>
+                <h1 class="font-serif text-4xl lg:text-5xl font-black mb-8 leading-tight">{{ $aboutUs->title }}</h1>
                 <div class="space-y-6 text-gray-600 leading-relaxed">
-                    <p>
-                        Berdiri sejak tahun 2015, Pustaka Aksara lahir dari sebuah mimpi sederhana: memberikan panggung bagi ide-ide brilian yang sering kali terabaikan oleh arus utama. Kami percaya bahwa setiap naskah adalah benih pengetahuan yang berpotensi mengubah dunia.
-                    </p>
-                    <p>
-                        Dimulai dari sebuah garasi kecil di Jakarta, kami kini telah tumbuh menjadi rumah bagi lebih dari 500 penulis dari seluruh penjuru nusantara. Fokus kami bukan sekadar mencetak buku, melainkan mengkurasi pengalaman membaca yang mendalam bagi setiap individu.
-                    </p>
-                    <p>
-                        Di era digital ini, kami tetap menjunjung tinggi kualitas cetakan fisik sambil terus berinovasi dalam penyebaran literasi melalui platform-platform modern.
-                    </p>
+                    {!! $aboutUs->description !!}
                 </div>
             </div>
         </div>
