@@ -52,6 +52,7 @@
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <!-- Text Content -->
             <div class="max-w-2xl">
+                @if($heroSection)
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
                     {{ $heroSection->title }}
@@ -62,6 +63,18 @@
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                    {{ $heroSection->description }}
                 </p>
+                @else
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
+                    Pustaka Aksara
+                </div>
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 leading-tight mb-6">
+                   Menerbitkan Karya Terbaik untuk Indonesia yang Lebih Cerdas
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                   Temukan buku-buku terbaik dan kirimkan naskah Anda untuk diterbitkan bersama Pustaka Aksara.
+                </p>
+                @endif
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="{{ route('koleksi') }}" class="inline-flex justify-center items-center gap-2 bg-brand-500 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
                         <i data-lucide="library" class="w-5 h-5"></i>
@@ -76,6 +89,7 @@
 
             <!-- Image/Visual Content -->
             <div class="relative lg:ml-10">
+                @if($heroSection)
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
                     <img src="{{ $heroSection->image_url }}" alt="Tumpukan Buku Klasik" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
@@ -85,6 +99,14 @@
                         </div>
                     </div>
                 </div>
+                @else
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-brand-100 flex items-center justify-center">
+                    <div class="text-center p-8">
+                        <i data-lucide="book-open" class="w-24 h-24 text-brand-400 mx-auto mb-4"></i>
+                        <p class="font-serif text-xl text-brand-600 italic">"Membuka Jendela Dunia"</p>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
