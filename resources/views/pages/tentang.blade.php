@@ -94,7 +94,33 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Team Member 1 -->
+            @forelse($teamMembers as $index => $member)
+            <!-- Team Member {{ $loop->iteration }} -->
+            <div class="team-member group {{ $index % 2 === 1 ? 'text-right lg:text-left' : '' }}">
+                <div class="aspect-square overflow-hidden rounded-2xl mb-6 bg-gray-200">
+                    @if($member->photo_url)
+                    <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" class="w-full h-full object-cover">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center bg-gray-300">
+                        <i data-lucide="user" class="w-20 h-20 text-gray-500"></i>
+                    </div>
+                    @endif
+                </div>
+                <h4 class="font-bold text-lg mb-1">{{ $member->name }}</h4>
+                <p class="text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">{{ $member->position }}</p>
+                
+                @if(count($member->social_links) > 0)
+                <div class="flex gap-3 {{ $index % 2 === 1 ? 'justify-end lg:justify-start' : '' }} opacity-0 group-hover:opacity-100 transition-opacity">
+                    @foreach($member->social_links as $platform => $url)
+                    <a href="{{ $url }}" target="_blank" class="text-gray-400 hover:text-brand-500 cursor-pointer">
+                        <i data-lucide="{{ $platform === 'email' ? 'mail' : $platform }}" class="w-4 h-4"></i>
+                    </a>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+            @empty
+            <!-- Fallback team members if no data -->
             <div class="team-member group">
                 <div class="aspect-square overflow-hidden rounded-2xl mb-6 bg-gray-200">
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="CEO" class="w-full h-full object-cover">
@@ -106,7 +132,6 @@
                     <i data-lucide="twitter" class="w-4 h-4 text-gray-400 hover:text-brand-500 cursor-pointer"></i>
                 </div>
             </div>
-            <!-- Team Member 2 -->
             <div class="team-member group text-right lg:text-left">
                 <div class="aspect-square overflow-hidden rounded-2xl mb-6 bg-gray-200">
                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Editor" class="w-full h-full object-cover">
@@ -117,7 +142,6 @@
                     <i data-lucide="linkedin" class="w-4 h-4 text-gray-400 hover:text-brand-500 cursor-pointer"></i>
                 </div>
             </div>
-            <!-- Team Member 3 -->
             <div class="team-member group">
                 <div class="aspect-square overflow-hidden rounded-2xl mb-6 bg-gray-200">
                     <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Art Director" class="w-full h-full object-cover">
@@ -129,7 +153,6 @@
                     <i data-lucide="dribbble" class="w-4 h-4 text-gray-400 hover:text-brand-500 cursor-pointer"></i>
                 </div>
             </div>
-            <!-- Team Member 4 -->
             <div class="team-member group text-right lg:text-left">
                 <div class="aspect-square overflow-hidden rounded-2xl mb-6 bg-gray-200">
                     <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Marketing" class="w-full h-full object-cover">
@@ -141,11 +164,12 @@
                     <i data-lucide="mail" class="w-4 h-4 text-gray-400 hover:text-brand-500 cursor-pointer"></i>
                 </div>
             </div>
+            @endforelse
         </div>
     </div>
 </section>
 
-<!-- Partners / Publishers -->
+{{-- <!-- Partners / Publishers -->
 <section class="py-16 bg-white border-y border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="text-center text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-10">Bekerjasama Dengan</p>
@@ -156,5 +180,5 @@
             <span class="text-2xl font-bold tracking-tighter">GLOBALPRESS</span>
         </div>
     </div>
-</section>
+</section> --}}
 @endsection
