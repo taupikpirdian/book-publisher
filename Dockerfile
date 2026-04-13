@@ -48,6 +48,12 @@ RUN rm -f bootstrap/cache/packages.php \
 # Build frontend assets
 RUN npm run build
 
+# Publish Livewire assets
+RUN php artisan vendor:publish --tag=livewire:assets --force || true
+
+# Create storage link
+RUN php artisan storage:link || true
+
 # Permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache
