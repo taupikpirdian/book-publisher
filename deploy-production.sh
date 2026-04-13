@@ -26,8 +26,8 @@ if [ ! -f "artisan" ]; then
     exit 1
 fi
 
-if ! command -v docker-compose &> /dev/null; then
-    echo -e "${RED}❌ Error: docker-compose not found${NC}"
+if ! command -v docker compose &> /dev/null; then
+    echo -e "${RED}❌ Error: docker compose not found${NC}"
     exit 1
 fi
 
