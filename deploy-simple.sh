@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###############################################################################
-# Simple Production Deploy Script (No PHP/Composer required on host)
+# Simple Production Deploy Script
 # Usage: ./deploy-simple.sh
 ###############################################################################
 
@@ -14,8 +14,13 @@ echo "🛑 Stopping containers..."
 docker-compose down
 echo ""
 
+# Remove old public volume to get fresh assets
+echo "🗑️  Removing old public volume..."
+docker volume rm book-publisher_app_public 2>/dev/null || true
+echo ""
+
 # Rebuild everything
-echo "🔨 Rebuilding containers (this may take a few minutes)..."
+echo "🔨 Rebuilding containers..."
 docker-compose build --no-cache
 echo ""
 
@@ -28,12 +33,19 @@ echo ""
 echo "⏳ Waiting for containers..."
 sleep 5
 
+# Initialize public assets volume
+echo "📦 Initializing public assets..."
+chmod +x docker/init-public-volume.sh 2>/dev/null || true
+docker/init-public-volume.sh 2>/dev/null || echo "   ⚠️  Init failed, trying manual copy..."
+echo ""
+
 # Verify
 echo "🔍 Verifying deployment..."
 if docker exec book-publisher-nginx test -f /var/www/public/vendor/livewire/livewire.js; then
     echo "✅ Livewire assets OK"
 else
     echo "❌ Livewire assets NOT found"
+    echo "   Manual fix: docker cp book-publisher:/var/www/public/vendor book-publisher-nginx:/var/www/public/"
     exit 1
 fi
 
