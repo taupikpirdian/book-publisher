@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $books = Book::where('is_active', true)->where('is_featured', true)->latest()->take(4)->get();
 
-        return view('pages.ok', compact('heroSection', 'testimonial', 'books', 'companyValues'));
+        return view('pages.index', compact('heroSection', 'testimonial', 'books', 'companyValues'));
     }
 
     public function subscribeNewsletter(Request $request)
