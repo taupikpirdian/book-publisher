@@ -52,33 +52,48 @@ chmod -R 775 ../assets/book_publisher storage/logs bootstrap/cache
 echo -e "${GREEN}✓ Directories ready${NC}"
 echo ""
 
-# Step 3: Install dependencies (if needed)
+# Step 3: Install dependencies (if needed) - INSIDE CONTAINER
 if [ -f "composer.json" ]; then
-    echo -e "${YELLOW}📦 Installing dependencies...${NC}"
-    composer install --optimize-autoloader --no-dev --no-interaction 2>&1 | tail -5
-    echo -e "${GREEN}✓ Dependencies installed${NC}"
+    echo -e "${YELLOW}📦 Building app container first...${NC}"
+    docker-compose build app --no-cache 2>&1 | tail -5
+    echo -e "${GREEN}✓ App container built${NC}"
     echo ""
 fi
 
-# Step 4: Publish Livewire assets
-echo -e "${YELLOW}📦 Publishing Livewire assets...${NC}"
-php artisan vendor:publish --tag=livewire:assets --force 2>&1 | grep -v "Warning:"
+# Step 4: Start containers (need to run for publishing assets)
+echo -e "${YELLOW}▶️  Starting containers temporarily...${NC}"
+docker-compose up -d 2>&1 | tail -3
+echo -e "${GREEN}✓ Containers started${NC}"
+echo ""
+
+# Wait for containers to be ready
+echo -e "${YELLOW}⏳ Waiting for containers...${NC}"
+sleep 3
+
+# Step 4b: Publish Livewire assets INSIDE CONTAINER
+echo -e "${YELLOW}📦 Publishing Livewire assets (inside container)...${NC}"
+docker-compose exec -T app php artisan vendor:publish --tag=livewire:assets --force 2>&1 | grep -v "Warning:" || true
 echo -e "${GREEN}✓ Livewire assets published${NC}"
+echo ""
+
+# Step 4c: Create storage link
+echo -e "${YELLOW}🔗 Creating storage link (inside container)...${NC}"
+docker-compose exec -T app php artisan storage:link 2>&1 | grep -v "Warning:" || true
+echo -e "${GREEN}✓ Storage link created${NC}"
 echo ""
 
 # Step 5: Verify Livewire assets
 echo -e "${YELLOW}🔍 Verifying Livewire assets...${NC}"
-if [ -d "public/vendor/livewire" ] && [ "$(ls -A public/vendor/livewire 2>/dev/null)" ]; then
-    ASSET_COUNT=$(ls -1 public/vendor/livewire/*.js 2>/dev/null | wc -l)
-    echo -e "${GREEN}✓ Livewire assets exist ($ASSET_COUNT files)${NC}"
+if docker exec book-publisher-nginx test -f /var/www/public/vendor/livewire/livewire.js; then
+    echo -e "${GREEN}✓ Livewire assets exist in container${NC}"
 else
-    echo -e "${RED}❌ Livewire assets not found!${NC}"
+    echo -e "${RED}❌ Livewire assets not found in container!${NC}"
     exit 1
 fi
 echo ""
 
-# Step 6: Stop containers
-echo -e "${YELLOW}🛑 Stopping containers...${NC}"
+# Step 6: Stop containers (will rebuild next)
+echo -e "${YELLOW}🛑 Stopping containers for rebuild...${NC}"
 docker-compose down 2>&1 | tail -3
 echo -e "${GREEN}✓ Containers stopped${NC}"
 echo ""
@@ -90,8 +105,8 @@ docker volume prune -f >/dev/null 2>&1 || true
 echo -e "${GREEN}✓ Old volumes cleaned${NC}"
 echo ""
 
-# Step 8: Rebuild containers
-echo -e "${YELLOW}🔨 Rebuilding containers (this may take a few minutes)...${NC}"
+# Step 8: Rebuild containers (final)
+echo -e "${YELLOW}🔨 Rebuilding all containers (final)...${NC}"
 docker-compose build --no-cache 2>&1 | tail -10
 echo -e "${GREEN}✓ Containers rebuilt${NC}"
 echo ""
