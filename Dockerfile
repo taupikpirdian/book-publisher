@@ -51,12 +51,24 @@ RUN npm run build
 # Publish Livewire assets
 RUN php artisan vendor:publish --tag=livewire:assets --force || true
 
+# Copy Livewire assets directly to ensure they exist in the image
+RUN mkdir -p /var/www/public/vendor/livewire && \
+    cp -r vendor/livewire/livewire/dist/* /var/www/public/vendor/livewire/ && \
+    chown -R www-data:www-data /var/www/public/vendor/livewire
+
 # Create storage link
 RUN php artisan storage:link || true
 
 # Permissions
 RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 storage bootstrap/cache
+    && chmod -R 775 storage bootstrap/cache \
+    && chmod +x docker/entrypoint.sh
+
+# Copy entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 9000
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
