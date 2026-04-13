@@ -13,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Trust all proxy headers for HTTPS detection
         $middleware->trustProxies(at: '*');
+        
+        // Force HTTPS in production
+        $middleware->appendToGroup('web', [
+            \App\Http\Middleware\ForceHttps::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
