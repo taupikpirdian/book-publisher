@@ -4,7 +4,13 @@
       "Bash(composer *)",
       "Bash(php *)",
       "Bash(find *)",
-      "Bash(rm *)"
+      "Bash(rm *)",
+      "Bash(docker exec *)",
+      "Bash(docker cp *)",
+      "Bash(docker-compose *)",
+      "Bash(sleep *)",
+      "Bash(docker/init-public-volume.sh)",
+      "Bash(curl *)"
     ]
   },
   "$version": 3
