@@ -19,7 +19,8 @@ class ForceHttps
         }
 
         // Force HTTPS for all other environments
-        if (!$request->secure() && app()->environment('production')) {
+        // Only redirect GET/HEAD requests to avoid losing POST data and method
+        if (!$request->secure() && app()->environment('production') && ($request->isMethod('GET') || $request->isMethod('HEAD'))) {
             return redirect()->secure($request->path());
         }
 
