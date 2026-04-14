@@ -51,6 +51,9 @@ RUN npm run build
 # Publish Livewire assets
 RUN php artisan vendor:publish --tag=livewire:assets --force || true
 
+# Publish Filament assets
+RUN php artisan filament:install --assets --force || true
+
 # Copy Livewire assets directly to ensure they exist in the image
 RUN mkdir -p /var/www/public/vendor/livewire && \
     cp -r vendor/livewire/livewire/dist/* /var/www/public/vendor/livewire/ && \

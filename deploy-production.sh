@@ -76,7 +76,13 @@ docker-compose exec -T app php artisan vendor:publish --tag=livewire:assets --fo
 echo -e "${GREEN}✓ Livewire assets published${NC}"
 echo ""
 
-# Step 4c: Create storage link
+# Step 4c: Publish Filament assets INSIDE CONTAINER
+echo -e "${YELLOW}📦 Publishing Filament assets (inside container)...${NC}"
+docker-compose exec -T app php artisan filament:install --assets --force 2>&1 | grep -v "Warning:" || true
+echo -e "${GREEN}✓ Filament assets published${NC}"
+echo ""
+
+# Step 4d: Create storage link
 echo -e "${YELLOW}🔗 Creating storage link (inside container)...${NC}"
 docker-compose exec -T app php artisan storage:link 2>&1 | grep -v "Warning:" || true
 echo -e "${GREEN}✓ Storage link created${NC}"
