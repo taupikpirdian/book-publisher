@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\AboutPage;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,9 +26,5 @@ class AppServiceProvider extends ServiceProvider
             $aboutPage = AboutPage::where('is_active', true)->first();
             $view->with('footerData', $aboutPage);
         });
-
-        if (app()->environment('production')) {
-            URL::forceScheme('https');
-        }
     }
 }
