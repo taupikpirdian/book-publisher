@@ -1,5 +1,5 @@
 # 🚀 Quick Deploy to Production
-### Step 1: Jalankan Deploy Script
+### Jalankan Deploy Script
 
 ```bash
 # Buat executable (hanya pertama kali)
