@@ -26,22 +26,6 @@ class AboutPageForm
                     ->url()
                     ->default(null)
                     ->helperText('Dapatkan URL dari menu Asset Images'),
-                TextInput::make('contact_address')
-                    ->default(null),
-                TextInput::make('contact_email')
-                    ->email()
-                    ->default(null),
-                TextInput::make('contact_phone')
-                    ->tel()
-                    ->default(null),
-                TextInput::make('social_instagram')
-                    ->default(null),
-                TextInput::make('social_twitter')
-                    ->default(null),
-                TextInput::make('social_facebook')
-                    ->default(null),
-                TextInput::make('social_linkedin')
-                    ->default(null),
                 Toggle::make('is_active')
                     ->required(),
             ]);

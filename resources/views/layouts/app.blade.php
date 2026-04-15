@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pustaka Aksara - Penerbit Buku Indonesia</title>
-    
+    <title>@yield('title', $settings->meta_title ?? 'Pustaka Aksara - Penerbit Buku Indonesia')</title>
+
+    @if($settings && $settings->meta_description)
+    <meta name="description" content="{{ strip_tags($settings->meta_description) }}">
+    @endif
+
+    @if($settings && $settings->meta_keywords)
+    <meta name="keywords" content="{{ $settings->meta_keywords }}">
+    @endif
+
+    @if($settings && $settings->og_image)
+    <meta property="og:image" content="{{ $settings->og_image }}">
+    @endif
+
+    @if($settings && $settings->favicon_url)
+    <link rel="icon" type="image/x-icon" href="{{ $settings->favicon_url }}">
+    @endif
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

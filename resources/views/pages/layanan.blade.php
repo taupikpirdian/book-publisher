@@ -24,7 +24,11 @@
                 {{ $service->description }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="https://wa.me/6285846132417?text=Halo%20Pustaka%20Aksara,%20saya%20ingin%20konsultasi%20mengenai%20layanan%20penerbitan.%20Mohon%20informasi%20lebih%20lanjut.%20Terima%20kasih." target="_blank" class="bg-brand-900 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
+                @php
+                    $waNumber = $settings->contact_whatsapp ?? '6285846132417';
+                    $waMessage = urlencode('Halo ' . ($settings->site_name ?? 'Pustaka Aksara') . ', saya ingin konsultasi mengenai layanan penerbitan. Mohon informasi lebih lanjut. Terima kasih.');
+                @endphp
+                <a href="https://wa.me/{{ $waNumber }}?text={{ $waMessage }}" target="_blank" class="bg-brand-900 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
                     Konsultasi Gratis <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -186,7 +190,11 @@
         <h2 class="font-serif text-3xl font-bold mb-6">Punya Pertanyaan Lain?</h2>
         <p class="text-gray-500 mb-10">Kami siap menjawab segala keraguan Anda mengenai royalti, hak cipta, dan proses teknis lainnya.</p>
         <div class="flex justify-center gap-4">
-            <a href="https://wa.me/6285846132417?text=Halo%20Pustaka%20Aksara,%20saya%20ingin%20bertanya%20mengenai%20layanan%20penerbitan.%20Mohon%20informasi%20lebih%20lanjut.%20Terima%20kasih." target="_blank" class="bg-brand-500 text-brand-900 px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all">Hubungi Tim Editor</a>
+            @php
+                $waNumber = $settings->contact_whatsapp ?? '6285846132417';
+                $waMessage = urlencode('Halo ' . ($settings->site_name ?? 'Pustaka Aksara') . ', saya ingin bertanya mengenai layanan penerbitan. Mohon informasi lebih lanjut. Terima kasih.');
+            @endphp
+            <a href="https://wa.me/{{ $waNumber }}?text={{ $waMessage }}" target="_blank" class="bg-brand-500 text-brand-900 px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all">Hubungi Tim Editor</a>
             <a href="{{ route('faq') }}" class="bg-gray-100 text-gray-600 px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-all">Buka FAQ</a>
         </div>
     </div>

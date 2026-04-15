@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', $settings->meta_title ?? 'Pustaka Aksara - Penerbit Buku Indonesia')
+
 @section('content')
 <!-- Floating Notification -->
 @if(session('success') || session('error'))
@@ -55,10 +58,10 @@
                 @if($heroSection)
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
-                    {{ $heroSection->title }}
+                    {{ $heroSection->badge_text ?? $heroSection->title }}
                 </div>
                 <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 leading-tight mb-6">
-                   {{ $heroSection->title_highlight }}
+                   {!! $heroSection->title_highlight !!}
                 </h1>
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                    {{ $heroSection->description }}
@@ -66,13 +69,13 @@
                 @else
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-sm font-medium mb-6">
                     <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
-                    Pustaka Aksara
+                    {{ $settings->site_name ?? 'Pustaka Aksara' }}
                 </div>
                 <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 leading-tight mb-6">
-                   Menerbitkan Karya Terbaik untuk Indonesia yang Lebih Cerdas
+                   {{ $settings->site_name ?? 'Pustaka Aksara' }}
                 </h1>
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                   Temukan buku-buku terbaik dan kirimkan naskah Anda untuk diterbitkan bersama Pustaka Aksara.
+                   {{ $settings->meta_description ?? 'Temukan buku-buku terbaik dan kirimkan naskah Anda untuk diterbitkan bersama ' . ($settings->site_name ?? 'Pustaka Aksara') . '.' }}
                 </p>
                 @endif
                 <div class="flex flex-col sm:flex-row gap-4">
@@ -89,13 +92,17 @@
 
             <!-- Image/Visual Content -->
             <div class="relative lg:ml-10">
-                @if($heroSection)
+                @if($heroSection && $heroSection->image_url)
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
-                    <img src="{{ $heroSection->image_url }}" alt="Tumpukan Buku Klasik" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ $heroSection->image_url }}" alt="{{ $heroSection->title ?? 'Hero Image' }}" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                         <div class="p-8 text-white">
+                            @if($heroSection->quote_text)
                             <p class="font-serif text-xl italic">"{{ $heroSection->quote_text }}"</p>
+                            @if($heroSection->quote_author)
                             <p class="text-sm text-gray-300 mt-2">— {{ $heroSection->quote_author }}</p>
+                            @endif
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -199,6 +206,7 @@
 </section>
 
 <!-- Testimonial Penulis -->
+@if($testimonial)
 <section class="py-20 bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -209,7 +217,13 @@
                     "{{ $testimonial->testimonial }}"
                 </p>
                 <div class="flex items-center gap-4">
-                    <img src="{{ $testimonial->photo_path }}" alt="Foto Penulis" class="w-14 h-14 rounded-full object-cover">
+                    @if($testimonial->photo_path)
+                    <img src="{{ $testimonial->photo_url ?? $testimonial->photo_path }}" alt="Foto {{ $testimonial->name }}" class="w-14 h-14 rounded-full object-cover">
+                    @else
+                    <div class="w-14 h-14 rounded-full bg-brand-100 flex items-center justify-center">
+                        <i data-lucide="user" class="w-7 h-7 text-brand-600"></i>
+                    </div>
+                    @endif
                     <div>
                         <h4 class="font-bold text-ink">{{ $testimonial->name }}</h4>
                         <p class="text-sm text-gray-500">{{ $testimonial->title }}</p>
@@ -217,12 +231,12 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                {{-- <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Menulis" class="rounded-xl object-cover h-64 w-full shadow-md"> --}}
                 <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Buku" class="rounded-xl object-cover h-64 w-full shadow-md mt-8">
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <!-- CTA / Kirim Naskah -->
 <section id="kirim-naskah" class="py-20 relative overflow-hidden">
@@ -230,20 +244,21 @@
     <div class="absolute inset-0 bg-brand-900"></div>
     <!-- Pattern/texture -->
     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-    
+
     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Punya Naskah yang Menunggu untuk Diceritakan?</h2>
         <p class="text-brand-100 text-lg mb-10 max-w-2xl mx-auto">
             Kami selalu mencari suara-suara baru yang segar dan cerita yang memikat. Jangan biarkan naskah Anda hanya tersimpan di dalam laci.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="https://wa.me/6285846132417?text=Halo%20Pustaka%20Aksara,%20saya%20ingin%20mengirimkan%20naskah%20untuk%20diterbitkan.%20Mohon%20informasi%20mengenai%20persyaratan%20dan%20prosedur%20penerbitan.%20Terima%20kasih." target="_blank" class="inline-flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-xl">
+            @php
+                $whatsappNumber = $settings->contact_whatsapp ?? '6285846132417';
+                $whatsappMessage = urlencode('Halo ' . ($settings->site_name ?? 'Pustaka Aksara') . ', saya ingin mengirimkan naskah untuk diterbitkan. Mohon informasi mengenai persyaratan dan prosedur penerbitan. Terima kasih.');
+            @endphp
+            <a href="https://wa.me/{{ $whatsappNumber }}?text={{ $whatsappMessage }}" target="_blank" class="inline-flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-xl">
                 <i data-lucide="send" class="w-5 h-5"></i>
                 Kirim Naskah Sekarang
             </a>
-            {{-- <a href="#" class="inline-flex justify-center items-center gap-2 bg-transparent hover:bg-brand-800 text-white border border-brand-500 px-8 py-4 rounded-full font-medium transition-colors">
-                Baca Syarat & Ketentuan
-            </a> --}}
         </div>
     </div>
 </section>
