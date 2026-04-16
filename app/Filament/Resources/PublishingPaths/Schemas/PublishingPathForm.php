@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\PublishingPaths\Schemas;
 
-use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -65,13 +65,21 @@ class PublishingPathForm
                 RichEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
-                KeyValue::make('features')
+                Repeater::make('features')
                     ->label('Features')
-                    ->keyLabel('Feature Text')
-                    ->valueLabel('Feature Description (optional)')
                     ->addActionLabel('Add Feature')
+                    ->reorderableWithButtons()
+                    ->schema([
+                        TextInput::make('feature_text')
+                            ->label('Feature Text')
+                            ->required(),
+                        TextInput::make('feature_description')
+                            ->label('Feature Description (optional)'),
+                    ])
+                    ->defaultItems(0)
+                    ->columns(2)
                     ->columnSpanFull()
-                    ->helperText('Masukkan daftar fitur/keunggulan untuk jalur penerbitan ini'),
+                    ->helperText('Masukkan daftar fitur/keunggulan untuk jalur penerbitan ini. Gunakan tombol panah untuk mengatur urutan.'),
                 TextInput::make('button_text')
                     ->required()
                     ->default('Daftarkan Naskah'),

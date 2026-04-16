@@ -45,6 +45,18 @@ class PublishingPath extends Model
 
     public function getFeaturesListAttribute()
     {
-        return $this->features ?? [];
+        $features = $this->features ?? [];
+
+        // New format: array of objects with feature_text, feature_description
+        $isNewFormat = !empty($features) && isset($features[0]) && is_array($features[0]) && isset($features[0]['feature_text']);
+
+        if ($isNewFormat) {
+            return collect($features)->mapWithKeys(fn ($item) => [
+                $item['feature_text'] => $item['feature_description'] ?? '',
+            ])->toArray();
+        }
+
+        // Legacy format: key-value pairs
+        return $features;
     }
 }
