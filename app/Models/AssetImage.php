@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AssetImage extends Model
 {
     protected $fillable = [
+        'uuid',
         'name',
         'file_path',
         'file_type',
@@ -18,18 +20,24 @@ class AssetImage extends Model
         'file_size' => 'integer',
     ];
 
-    public function getUrlAttribute(): string
-    {
-        return url($this->file_path);
-    }
-
     protected static function booted(): void
     {
+        static::creating(function ($asset) {
+            if (empty($asset->uuid)) {
+                $asset->uuid = Str::uuid()->toString();
+            }
+        });
+
         static::deleting(function ($asset) {
             if (file_exists(public_path($asset->file_path))) {
                 unlink(public_path($asset->file_path));
             }
         });
+    }
+
+    public function getUrlAttribute(): string
+    {
+        return url($this->file_path);
     }
 
     public static function uploadImage($file, ?string $name = null): self

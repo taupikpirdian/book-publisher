@@ -16,6 +16,12 @@ class AssetImagesTable
     {
         return $table
             ->columns([
+                TextColumn::make('uuid')
+                    ->label('UUID')
+                    ->limit(8)
+                    ->tooltip(fn ($record) => $record->uuid)
+                    ->copyable()
+                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -48,7 +54,7 @@ class AssetImagesTable
                     ->icon('heroicon-o-clipboard-document')
                     ->color('success')
                     ->action(function ($livewire, $record) {
-                        $url = $record->url;
+                        $url = url('/v2/assets/images/' . $record->uuid);
                         $livewire->js(
                             "navigator.clipboard.writeText('{$url}')
                                 .then(() => {

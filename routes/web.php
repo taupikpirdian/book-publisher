@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\AssetImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KoleksiController;
 use App\Http\Controllers\LayananController;
@@ -16,6 +17,8 @@ Route::get('/assets/{path}', function ($path) {
     }
     return Storage::disk('public')->response($path);
 })->where('path', '.*');
+
+Route::get('/v2/assets/images/{uuid}', [AssetImageController::class, 'show']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/newsletter/subscribe', [HomeController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
