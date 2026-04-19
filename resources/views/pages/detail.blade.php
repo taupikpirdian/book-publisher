@@ -1,4 +1,17 @@
 @extends('layouts.app')
+
+@section('title', $book->meta_title ?? $book->title . ' - Penerbit SKT')
+
+@section('meta_description', strip_tags($book->meta_description ?? \Illuminate\Support\Str::limit($book->synopsis ?? '', 160)))
+
+@section('meta_keywords', $book->meta_keywords ?? '')
+
+@section('og_image', $book->og_image ?? $book->cover_image ?? '')
+
+@section('og_image_alt', $book->og_image_alt ?? $book->title ?? '')
+
+@section('canonical_url', $book->canonical_url ?? url()->current())
+
 @section('content')
 <style>
     .book-shadow {

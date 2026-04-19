@@ -5,17 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', $settings->meta_title ?? 'Pustaka Aksara - Penerbit Buku Indonesia')</title>
 
-    @if($settings && $settings->meta_description)
+    @hasSection('meta_description')
+    <meta name="description" content="@yield('meta_description')">
+    @elseif($settings && $settings->meta_description)
     <meta name="description" content="{{ strip_tags($settings->meta_description) }}">
     @endif
 
-    @if($settings && $settings->meta_keywords)
+    @hasSection('meta_keywords')
+    <meta name="keywords" content="@yield('meta_keywords')">
+    @elseif($settings && $settings->meta_keywords)
     <meta name="keywords" content="{{ $settings->meta_keywords }}">
     @endif
 
-    @if($settings && $settings->og_image)
+    @hasSection('og_image')
+    <meta property="og:image" content="@yield('og_image')">
+    @if(trim($__env->yieldContent('og_image_alt')))
+    <meta property="og:image:alt" content="@yield('og_image_alt')">
+    @endif
+    @elseif($settings && $settings->og_image)
     <meta property="og:image" content="{{ $settings->og_image }}">
     @endif
+
+    @hasSection('canonical_url')
+    <link rel="canonical" href="@yield('canonical_url')">
+    @endif
+
+    @stack('meta')
 
     @if($settings && $settings->favicon_url)
     <link rel="icon" type="image/x-icon" href="{{ $settings->favicon_url }}">
