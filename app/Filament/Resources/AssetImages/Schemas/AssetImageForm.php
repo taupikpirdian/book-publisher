@@ -34,6 +34,20 @@ class AssetImageForm
                         }
                         return $state;
                     })
+                    ->getUploadedFileUsing(function (FileUpload $component, string $file, string|array|null $storedFileNames): ?array {
+                        $record = $component->getRecord();
+
+                        if ($record && $record->uuid) {
+                            return [
+                                'name' => basename($file),
+                                'size' => 0,
+                                'type' => null,
+                                'url' => url('/v2/assets/images/' . $record->uuid),
+                            ];
+                        }
+
+                        return null;
+                    })
                     ->required()
                     ->columnSpanFull(),
             ]);

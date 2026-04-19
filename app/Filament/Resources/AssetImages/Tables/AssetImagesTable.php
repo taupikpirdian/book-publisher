@@ -27,6 +27,7 @@ class AssetImagesTable
                     ->sortable(),
                 ImageColumn::make('url')
                     ->label('Preview')
+                    ->getStateUsing(fn ($record) => url('/v2/assets/images/' . $record->uuid))
                     ->square()
                     ->size(64),
                 TextColumn::make('file_type')
