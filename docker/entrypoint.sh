@@ -8,6 +8,14 @@ if [ ! -d "/var/www/public/vendor/livewire" ] || [ -z "$(ls -A /var/www/public/v
     echo "✓ Livewire assets published"
 fi
 
+# Publish Filament assets if not exists
+if [ ! -d "/var/www/public/fonts/filament" ] || [ -z "$(ls -A /var/www/public/fonts/filament 2>/dev/null)" ]; then
+    echo "📦 Publishing Filament assets..."
+    php artisan filament:install --assets --force || true
+    chown -R www-data:www-data /var/www/public/fonts/filament /var/www/public/js/filament /var/www/public/css/filament 2>/dev/null
+    echo "✓ Filament assets published"
+fi
+
 # Copy public/js assets if not exists
 if [ ! -d "/var/www/public/js" ] || [ -z "$(ls -A /var/www/public/js)" ]; then
     echo "📦 Copying public/js assets..."
@@ -26,6 +34,7 @@ fi
 
 # Set permissions
 chown -R www-data:www-data /var/www/public/vendor/livewire 2>/dev/null || true
+chown -R www-data:www-data /var/www/public/fonts/filament /var/www/public/js/filament /var/www/public/css/filament 2>/dev/null || true
 chown -R www-data:www-data /var/www/public/js 2>/dev/null || true
 
 # Execute the CMD
