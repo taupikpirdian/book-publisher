@@ -25,7 +25,7 @@ class BookForm
                         TextInput::make('title')
                             ->required()
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (string $operation, $state, callable $set) => $operation === 'create' ? $set('slug', str($state)->slug()) : null),
+                            ->afterStateUpdated(fn (string $operation, $state, callable $set) => $operation === 'create' ? $set('slug', str($state)->slug() . '-' . str()->random(6)) : null),
                         TextInput::make('slug')
                             ->required()
                             ->unique(ignoreRecord: true),

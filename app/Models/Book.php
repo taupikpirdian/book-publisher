@@ -50,7 +50,7 @@ class Book extends Model
     {
         static::creating(function ($book) {
             if (empty($book->slug)) {
-                $book->slug = Str::slug($book->title);
+                $book->slug = Str::slug($book->title) . '-' . Str::random(6);
             }
         });
     }
