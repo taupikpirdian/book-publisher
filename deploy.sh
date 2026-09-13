@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -Eeuo pipefail
+set -eu
 
 echo "🚀 Starting deployment..."
 
