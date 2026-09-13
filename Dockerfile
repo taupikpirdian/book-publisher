@@ -1,6 +1,4 @@
-# syntax=docker/dockerfile:1
-
-FROM php:8.3-fpm
+FROM php:8.3-fpm AS app
 
 WORKDIR /var/www
 
@@ -23,32 +21,22 @@ RUN apt-get update && apt-get install -y \
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-    COMPOSER_CACHE_DIR=/tmp/composer-cache
-
 # Copy composer & package files FIRST
 COPY composer.json composer.lock package.json ./
 
 # Install vendor dependencies
-RUN --mount=type=cache,target=/tmp/composer-cache \
-    for attempt in 1 2 3; do \
-        composer install \
-            --no-dev \
-            --prefer-dist \
-            --optimize-autoloader \
-            --no-interaction \
-            --no-progress \
-            --no-scripts && break; \
-        if [ "$attempt" -eq 3 ]; then exit 1; fi; \
-        echo "Composer install failed (attempt $attempt/3); retrying..."; \
-        sleep $((attempt * 10)); \
-    done
+RUN composer install \
+    --optimize-autoloader \
+    --no-interaction \
+    --no-scripts
 
 # Install npm dependencies
 RUN npm install
 
 # Copy app source
 COPY . .
+
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint
 
 # Clean esbuild completely and reinstall to fix version mismatch
 RUN rm -rf node_modules/esbuild node_modules/.cache \
@@ -62,30 +50,22 @@ RUN rm -f bootstrap/cache/packages.php \
 # Build frontend assets
 RUN npm run build
 
-# Publish Livewire assets
-RUN php artisan vendor:publish --tag=livewire:assets --force || true
-
-# Publish Filament assets
-RUN php artisan filament:install --assets --force || true
-
-# Copy Livewire assets directly to ensure they exist in the image
-RUN mkdir -p /var/www/public/vendor/livewire && \
-    cp -r vendor/livewire/livewire/dist/* /var/www/public/vendor/livewire/ && \
-    chown -R www-data:www-data /var/www/public/vendor/livewire
-
-# Create storage link
-RUN php artisan storage:link || true
-
 # Permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache \
-    && chmod +x docker/entrypoint.sh
+    && chmod +x /usr/local/bin/entrypoint
 
-# Copy entrypoint script
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Increase PHP upload limits (default is 2MB)
+RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "post_max_size = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "max_execution_time = 300" >> /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/uploads.ini
 
 EXPOSE 9000
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["entrypoint"]
 CMD ["php-fpm"]
+
+FROM nginx:alpine AS nginx
+
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=app /var/www/public /var/www/public

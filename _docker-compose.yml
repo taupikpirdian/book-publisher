@@ -3,16 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: app
-    image: book-publisher:latest
     container_name: book-publisher
     restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      CONTAINER_ROLE: app
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    working_dir: /var/www
     volumes:
       # Uploaded assets sync to host
       - ../assets/book_publisher:/var/www/storage/app/public
@@ -23,14 +16,12 @@ services:
       # Vite build assets (persistent)
       - app_build_book_publisher:/var/www/public/build
     networks:
-      - app_network
+      - book-publisher-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: nginx
-    image: book-publisher-nginx:latest
+    image: nginx:alpine
     container_name: book-publisher-nginx
     restart: unless-stopped
     ports:
@@ -45,12 +36,12 @@ services:
       # Vite build assets
       - app_build_book_publisher:/var/www/public/build
     networks:
-      - app_network
+      - book-publisher-network
     depends_on:
       - app
 
 networks:
-  app_network:
+  book-publisher-network:
     driver: bridge
 
 volumes:
